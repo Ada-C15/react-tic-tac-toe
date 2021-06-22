@@ -10,11 +10,11 @@ const Square = (props) => {
 
   return <button
     className="square"
-    onClick={() => props.onClickCallback(props.id)}
+    onClick={ () => props.onClickCallback(props.id) }
   >
     {props.value}
   </button>
-};
+}
 
 Square.propTypes = {
   value: PropTypes.string.isRequired,

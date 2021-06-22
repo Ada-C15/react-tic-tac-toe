@@ -22,8 +22,9 @@ describe('Wave 1: Square', () => {
   });
 });
 
+// passed
 describe('Wave 2: Square', () => {
-  test.skip('when clicked on it calls the callback function', async () => {
+  test('when clicked on it calls the callback function', async () => {
     const callback = jest.fn();
 
     render(<Square value="X" id={1} onClickCallback={callback} />);
