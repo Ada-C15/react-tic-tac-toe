@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import Board from './Board';
 import { render, screen, fireEvent} from '@testing-library/react'
 
-
+// passed
 describe('Wave 1: Board', () => {
   // Sample input to the Board component
   const SAMPLE_BOARD = [
