@@ -31,11 +31,23 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   console.log(squares);
+  // Will we need to make more variables to track state here? Player1/Player2, winner/noWinner?
 
   // Wave 2
   // You will need to create a method to change the square
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+
+  //should this function literally be called onClickCallback? should it be modifying setSquares()?
+  const changeSquares = (id) => {
+    setSquares()
+    // if the id clicked on == 1, change the value of the square with id 1
+
+    // if the state is PLAYER_1, the value passed in on a click will be x
+    // then the state will change to PLAYER_2
+    // if the state is PLAYER_2, the value passed in on a click will be o
+    // then the state will change to PLAYER_1
+  }
 
 
   const checkForWinner = () => {
@@ -63,7 +75,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onclickCallback={changeSquares} />
       </main>
     </div>
   );

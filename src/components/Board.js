@@ -16,7 +16,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
   }
   // How to I flatten squares to get an array of all ids and values?
   const squareComponents = flatArray.map(square => {
-    return <Square id={square.id} value={square.value}></Square>
+    return <Square id={square.id} value={square.value}> onClickCallback={onClickCallback}</Square>
   })
 
   // console.log('This is the flattened array:', flatArray)
@@ -25,6 +25,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
   return squareComponents
 }
 
+// squareList is comfusing to me here. Why are we calling generateSquareComponents with the same parameters as above?
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
   // console.log(squareList);
@@ -32,9 +33,6 @@ const Board = ({ squares, onClickCallback }) => {
     {squareList}
   </div>
 }
-
-// Board should return (?) an array of arrays in the following pattern:
-// [{id: 1, value: 'X'}, {id: 2, value: 'O'}, ...]
 
 // Are these PropTypes what Board should be handed? Or what it should be handing to something else?
 
