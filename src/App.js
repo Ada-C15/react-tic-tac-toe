@@ -57,9 +57,10 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Tic Tac Toe</h1>
+        <h1>Tic Tac Toe Game</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <div className="reset-button"><button>Reset Game</button> </div>
+        
       </header>
       <main>
         <Board squares={squares} />
