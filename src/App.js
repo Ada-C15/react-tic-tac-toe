@@ -7,6 +7,7 @@ const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
 const generateSquares = () => {
+  //can this be created as flat after wave 5?
   const squares = [];
 
   let currentId = 0;
@@ -16,7 +17,7 @@ const generateSquares = () => {
     for (let col = 0; col < 3; col += 1) {
       squares[row].push({
         id: currentId,
-        value: '',
+        value: 'X',
       });
       currentId += 1;
     }
