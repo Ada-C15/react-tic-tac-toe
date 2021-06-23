@@ -10,6 +10,8 @@ const Square = (props) => {
 
   return <button
     className="square"
+    id={props.id}
+    onClickCallback={props.onClickCallback}
   >
     {props.value}
   </button>

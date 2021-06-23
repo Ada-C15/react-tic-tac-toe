@@ -21,7 +21,6 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
   return squares;
 }
 
@@ -53,7 +52,9 @@ const App = () => {
   const resetGame = () => {
     // Complete in Wave 4
   }
-
+  const onClickCallback = () =>{
+    return true
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -62,7 +63,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={onClickCallback}/>
       </main>
     </div>
   );
