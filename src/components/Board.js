@@ -9,6 +9,16 @@ const generateSquareComponents = (squares, onClickCallback) => {
   // squares is a 2D Array, but 
   //  you need to return a 1D array
   //  of square components
+  const squareComponents = []
+  squares.forEach((row) => {
+    row.forEach((square) => {
+      squareComponents.push(<Square key={ square.id }  value = { square.value }
+      id = { square.id } onClickCallback = { onClickCallback }/>)
+      // console.log(squares)
+    })
+  });
+  console.log(squareComponents)
+  return squareComponents
 
 }
 

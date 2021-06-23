@@ -1,3 +1,7 @@
+// container component, responsible for holding data about the game state
+// X and Os marked and their locations, player info, determining the winner
+// rendering the board
+
 import React, { useState } from 'react';
 import './App.css';
 
@@ -8,7 +12,6 @@ const PLAYER_2 = 'O';
 
 const generateSquares = () => {
   const squares = [];
-
   let currentId = 0;
 
   for (let row = 0; row < 3; row += 1) {
@@ -46,8 +49,7 @@ const App = () => {
     // 2. Go down each column to see if
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
-
+    //    all three squares have the same value. 
   }
 
   const resetGame = () => {
