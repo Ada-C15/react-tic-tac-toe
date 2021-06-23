@@ -40,7 +40,17 @@ const App = () => {
 
   //should this function literally be called onClickCallback? should it be modifying setSquares()?
   const changeSquares = (id) => {
-    setSquares()
+    // Does the ... clone squares into a new array?
+    const newSquares = [...squares];
+    newSquares.forEach(board => {
+      board.forEach(square => {
+        if (square.id === id) {
+          square.value = PLAYER_1
+        }
+      })
+    })
+
+    setSquares(newSquares);
     // if the id clicked on == 1, change the value of the square with id 1
 
     // if the state is PLAYER_1, the value passed in on a click will be x
@@ -75,7 +85,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onclickCallback={changeSquares} />
+        <Board squares={squares} onClickCallback={changeSquares} />
       </main>
     </div>
   );
