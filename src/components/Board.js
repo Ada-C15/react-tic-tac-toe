@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
-  let squareComponents = [].concat(...squares);
-  return squareComponents.map((square) => {
+  let squaresFlat = [].concat(...squares);
+  return squaresFlat.map((square) => {
     return <Square key={square.id} id={square.id} value={square.value} onClickCallback={onClickCallback} />
   })
   // squares is a 2D Array, but 
