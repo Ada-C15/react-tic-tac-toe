@@ -3,22 +3,40 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-
+// Is squares a prop here?
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
-  // squares is a 2D Array, but 
+  // squares is a 2D Array, but
   //  you need to return a 1D array
   //  of square components
 
+  let flatArray = [];
+  for (let i = 0; i < squares.length; i++) {
+    flatArray = flatArray.concat(squares[i]);
+  }
+  // How to I flatten squares to get an array of all ids and values?
+  const squareComponents = flatArray.map(square => {
+    return <Square id={square.id} value={square.value}></Square>
+  })
+
+  // console.log('This is the flattened array:', flatArray)
+  // console.log('This is the flattened array mapped to square components: ', squareComponents)
+
+  return squareComponents
 }
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
-  return <div className="grid" >
+  // console.log(squareList);
+  return <div className="grid">
     {squareList}
   </div>
 }
+
+// Board should return (?) an array of arrays in the following pattern:
+// [{id: 1, value: 'X'}, {id: 2, value: 'O'}, ...]
+
+// Are these PropTypes what Board should be handed? Or what it should be handing to something else?
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(

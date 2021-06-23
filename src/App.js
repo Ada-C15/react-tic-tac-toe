@@ -30,9 +30,10 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
+  console.log(squares);
 
   // Wave 2
-  // You will need to create a method to change the square 
+  // You will need to create a method to change the square
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
@@ -40,12 +41,12 @@ const App = () => {
   const checkForWinner = () => {
     // Complete in Wave 3
     // You will need to:
-    // 1. Go accross each row to see if 
+    // 1. Go accross each row to see if
     //    3 squares in the same row match
     //    i.e. same value
     // 2. Go down each column to see if
     //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
+    // 3. Go across each diagonal to see if
     //    all three squares have the same value.
 
   }

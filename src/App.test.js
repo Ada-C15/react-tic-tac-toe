@@ -9,12 +9,12 @@ describe('App', () => {
   const clickButtonAndVerifyResult = (container, buttonIndex, expectedResult) => {
     let buttons = container.querySelectorAll('.grid button');
     fireEvent.click(buttons[buttonIndex]);
-    
+
     buttons = container.querySelectorAll('.grid button');
     expect(buttons[buttonIndex].innerHTML).toEqual(expectedResult);
   }
 
-  describe.skip('Wave 2: clicking on squares and rendering App', () => {
+  describe('Wave 2: clicking on squares and rendering App', () => {
 
   test('App renders with a board of 9 empty buttons', () => {
     // Arrange-Act - Render the app
@@ -84,7 +84,7 @@ describe('App', () => {
   });
 });
 
-  
+
   describe.skip('Wave 3:  Winner tests', () => {
     describe('Prints "Winner is x" when x wins', () => {
       test('that a winner will be identified when 3 Xs get in a row across the top', () => {
@@ -136,7 +136,7 @@ describe('App', () => {
         expect(winnerScreen).not.toBeNull();
         expect(winnerScreen).toBeInTheDocument();
       });
-    
+
       test('that a winner will be identified when 3 Xs go accross the left column', () => {
         // Arrange
         const { container } = render(<App />);
@@ -275,7 +275,7 @@ describe('App', () => {
       expect(winnerScreen).not.toBeNull();
       expect(winnerScreen).toBeInTheDocument();
     });
-    
+
     test('that a winner will be identified when 3 Os go accross the left column', () => {
       // Arrange
       const { container } = render(<App />);
@@ -326,7 +326,7 @@ describe('App', () => {
       const winnerScreen = screen.queryByText('Winner is o')
       expect(winnerScreen).not.toBeNull();
       expect(winnerScreen).toBeInTheDocument();
-    });    
+    });
 
     test('that a winner will be identified when 3 Os go accross the top-left to bottom-right', () => {
       // Arrange
@@ -344,7 +344,7 @@ describe('App', () => {
       const winnerScreen = screen.queryByText('Winner is o')
       expect(winnerScreen).not.toBeNull();
       expect(winnerScreen).toBeInTheDocument();
-    });  
+    });
     test('that a winner will be identified when 3 Os go accross the top-right to bottom-left', () => {
       // Arrange
       const { container } = render(<App />);
@@ -361,20 +361,20 @@ describe('App', () => {
       const winnerScreen = screen.queryByText('Winner is o')
       expect(winnerScreen).not.toBeNull();
       expect(winnerScreen).toBeInTheDocument();
-    });       
+    });
   });
 
   describe.skip('Wave 4:  reset game button', () => {
     test('App has a "Reset Game" button', () => {
       // Arrange-Act
       render(<App />);
-  
+
       const resetButton = screen.getByText('Reset Game');
-  
+
       // Assert
       expect(resetButton).toBeInTheDocument();
     });
-  
+
     test('the button resets the game', () => {
       // Arrange - click on some squares
       const { container } = render(<App />);
@@ -387,7 +387,7 @@ describe('App', () => {
       // Act - Click the reset button
       fireEvent.click(resetButton);
 
-      // Assert - There should no longer be Xs or Os 
+      // Assert - There should no longer be Xs or Os
       // on the board.
       const xSquare = screen.queryByText('x');
       expect(xSquare).toBeNull();
