@@ -6,6 +6,13 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
+  const squaresFlat = [].concat(...squares);
+  return (squaresFlat)
+      return (
+          <div>
+            <Square />
+          </div>
+        )
   // squares is a 2D Array, but 
   //  you need to return a 1D array
   //  of square components
