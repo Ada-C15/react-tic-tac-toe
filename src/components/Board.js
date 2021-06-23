@@ -12,8 +12,11 @@ const generateSquareComponents = (squares, onClickCallback) => {
   const squareComponents = []
   squares.forEach((row) => {
     row.forEach((square) => {
-      squareComponents.push(<Square key={ square.id }  value = { square.value }
-      id = { square.id } onClickCallback = { onClickCallback }/>)
+      squareComponents.push(<Square 
+        key={ square.id }  
+        value = { square.value }
+        id = { square.id } 
+        onClickCallback = { onClickCallback }/>)
       // console.log(squares)
     })
   });
@@ -21,7 +24,8 @@ const generateSquareComponents = (squares, onClickCallback) => {
   return squareComponents
 
 }
-
+// functional component 
+// Generates the squares in the grid and that forms the board
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
   console.log(squareList);
