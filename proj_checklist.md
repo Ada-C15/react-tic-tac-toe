@@ -26,13 +26,13 @@ So the goal is to convert the above 2D array into [0,1,2,3,4,5,6,7,8]
 ## `Board` component
 
 - [X]  Implement the function `generateSquareComponents` to take in a 2D array, and transform it into a 1D array of nine `Square` components
-- [ ]  `Board` component should pass the appropriate information from the game state to each `Square`.
+- [X]  `Board` component should pass the appropriate information from the game state to each `Square`.
 
 
 ## `Square`
 
 - [X]  The `Square` component should display the value passed into it.
-- [ ]  The `Square` component should also hold an id. Square doesn't need to render this ID, but it will be used when handling events!
+- [X]  The `Square` component should also hold an id. Square doesn't need to render this ID, but it will be used when handling events!
 
 ---
 

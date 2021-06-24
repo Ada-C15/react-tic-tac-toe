@@ -5,9 +5,10 @@ import './Square.css'
 const Square = (props) => {
 
   // ❗️ is this print statement necessary? 
-  console.log(props) 
+  // console.log(props) 
 
-  // ✅ Wave 1: The `Square` component should display the value passed into it: 
+  // ✅ Wave 1: The `Square` component should display the value passed into it
+  // ✅ Wave 1: The `Square` component should also hold an id
   // ❗️ I don't understand how the following is working to call back a parent component when the square component gets clicked 
   return (
     <button className="square" onClick={() => props.onClickCallback(props.id)}>

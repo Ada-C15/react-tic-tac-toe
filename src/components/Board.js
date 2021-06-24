@@ -3,7 +3,7 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-
+// ✅ Wave 1: Implement the function `generateSquareComponents` to take in a 2D array, and transform it into a 1D array of nine `Square` components
 const generateSquareComponents = (squares, onClickCallback) => {
 
   // squares is in format [[0,1,2], [0,1,2], [0,1,2]]
@@ -25,10 +25,11 @@ const generateSquareComponents = (squares, onClickCallback) => {
   });
 }
 
+// ✅ Wave 1: `Board` component should pass the appropriate information from the game state to each `Square`.
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
 
-  console.log(squareList);
+  // console.log(squareList);
 
   return (
     <div className="grid" >
