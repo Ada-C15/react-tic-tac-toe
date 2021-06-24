@@ -48,17 +48,56 @@ const App = () => {
   setPlayer(player===PLAYER_1 ? PLAYER_2 : PLAYER_1);
 }
 
+  // const checkForWinner = () => {
+  //   // Complete in Wave 3
+  //   // You will need to:
+  //   // 1. Go accross each row to see if 
+  //   //    3 squares in the same row match
+  //   //    i.e. same value
+  //   // 2. Go down each column to see if
+  //   //    3 squares in each column match
+  //   // 3. Go across each diagonal to see if 
+  //   //    all three squares have the same value.
+  // }
+  
   const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
+    console.log('called');
+    // Columns
+    if (squares[0][0].value === squares[1][0].value && squares[1][0].value === squares[2][0].value && squares[0][0].value !== '') {
+      return squares[0][0].value;
+    }
+    if (squares[0][1].value === squares[1][1].value && squares[1][1].value === squares[2][1].value && squares[0][1].value !== '') {
+      return squares[0][1].value;
+    }
+    if (squares[0][2].value === squares[1][2].value && squares[1][2].value === squares[2][2].value && squares[0][2].value !== '') {
+      return squares[0][2].value;
+    }
+    // Rows
+    if (squares[0][0].value === squares[0][1].value && squares[0][1].value === squares[0][2].value && squares[0][0].value !== '') {
+      return squares[0][0].value;
+    }
+    if (squares[1][0].value === squares[1][1].value && squares[1][1].value === squares[1][2].value && squares[1][0].value !== '') {
+      return squares[1][0].value;
+    }
+    if (squares[2][0].value === squares[2][1].value && squares[2][1].value === squares[2][2].value && squares[2][0].value !== '') {
+      return squares[2][0].value;
+    }
+    // Diagonals
+    if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value && squares[0][0].value !== '') {
+      return squares[0][0].value;
+    }
+    if (squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value && squares[0][2].value !== '') {
+      return squares[0][2].value;
+    }
 
+    for (let row = 0; row < 3; row += 1) {
+      for (let col = 0; col < 3; col += 1) {
+        if (squares[row][col].value === '') {
+          return '';
+        }
+      }
+    }
+    return 'Tie';
   }
 
   const resetGame = () => {
@@ -69,7 +108,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is {checkForWinner()}</h2>
         <button>Reset Game</button>
       </header>
       <main>
