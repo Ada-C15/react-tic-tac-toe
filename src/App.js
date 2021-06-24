@@ -6,20 +6,20 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
-const turn = function(PLAYER_1, PLAYER_2) {
-  let goesFirst;
-  let goeSecond;
-  if (goesFirst === PLAYER_1) {
+// const turn = function(PLAYER_1, PLAYER_2) {
+//   let goesFirst;
+//   let goeSecond;
+//   if (goesFirst === PLAYER_1) {
     
-    }  goesSecond = PLAYER_2;
+//     }  goesSecond = PLAYER_2;
 
-  if (goesFirst === PLAYER_2) {
+//   if (goesFirst === PLAYER_2) {
 
-  } goesSecond = PLAYER_1;
+//   } goesSecond = PLAYER_1;
   
 
 
-};
+// };
 
 const generateSquares = () => {
   const squares = [];
@@ -45,7 +45,7 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
-  const [players, setPlayers] = useState(turn());
+  // const [players, setPlayers] = useState;
 
 
 
@@ -53,6 +53,16 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+
+
+  // change state by creating new data structure and replacing structure
+
+  // 
+
+  const play = () => {
+    const board = []
+    
+  }
   
   
 
