@@ -30,7 +30,8 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
-  console.log(squares);
+  // console.log(squares);
+  const [player, setPlayer] = useState(PLAYER_1);
   // Will we need to make more variables to track state here? Player1/Player2, winner/noWinner?
 
   // Wave 2
@@ -38,27 +39,26 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
-  //should this function literally be called onClickCallback? should it be modifying setSquares()?
   const changeSquares = (id) => {
     // Does the ... clone squares into a new array?
     const newSquares = [...squares];
+    // could I repeat the same logic I used to make a 1D array in Board here?
+    // seems redundant that we repeat the logic...could I make a helper function?
     newSquares.forEach(board => {
       board.forEach(square => {
         if (square.id === id) {
-          square.value = PLAYER_1
+          square.value = player
+          if (player === PLAYER_1) {
+            setPlayer(PLAYER_2)
+          } else if (player === PLAYER_2) {
+            setPlayer(PLAYER_1)
+          }
         }
       })
     })
 
     setSquares(newSquares);
-    // if the id clicked on == 1, change the value of the square with id 1
-
-    // if the state is PLAYER_1, the value passed in on a click will be x
-    // then the state will change to PLAYER_2
-    // if the state is PLAYER_2, the value passed in on a click will be o
-    // then the state will change to PLAYER_1
   }
-
 
   const checkForWinner = () => {
     // Complete in Wave 3
