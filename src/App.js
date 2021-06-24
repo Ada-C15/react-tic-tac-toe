@@ -49,37 +49,36 @@ const App = () => {
     const rowCheck = () => {
       for (let row = 0; row < 3; row += 1) {
         if (squares[row][0].value === squares[row][1].value && squares[row][1].value === squares[row][2].value && squares[row][0].value !== '') {
+          console.log('rowCheck', squares[row][0].value);
           return squares[row][0].value;
-        } else {
-          return false;
         }
       }
+      console.log('No completed rows!');
+      return false;
     }
 
     const columnCheck = () => {
       for (let col = 0; col < 3; col += 1) {
         if (squares[0][col].value === squares[1][col].value && squares[1][col].value === squares[2][col].value && squares[0][col].value !== '') {
+          console.log('columnCheck', squares[0][col].value);
           return squares[0][col].value;
-        } else {
-          return false;
         }
       }
+      return false;
     }
 
     const diagonalLrCheck = () => {
       if (squares[2][0].value === squares[1][1].value && squares[1][1].value === squares[0][2].value && squares[1][1].value !== '') {
         return squares[1][1].value;
-      } else {
-        return false;
       }
+      return false;
     }
 
     const diagonalRlCheck = () => {
       if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value && squares[1][1].value !== '') {
         return squares[1][1].value;
-      } else {
-        return false;
       }
+      return false;
     }
 
     const resultChecks = rowCheck() || columnCheck() || diagonalLrCheck() || diagonalRlCheck();
@@ -137,9 +136,9 @@ const App = () => {
 
   const displayWinner = () => {
     if (winner === null) {
-      return `Current Player ${activePlayer.toUpperCase()}`;
+      return `Current Player ${activePlayer}`;
     } else {
-      return `Winner is ${winner.toUpperCase()}!`
+      return `Winner is ${winner}`
     }
 
   }
@@ -147,7 +146,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Tic Tac Toe Game</h1>
+        <h1>React Tic Tac Toe</h1>
         <h2>{displayWinner()}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
@@ -160,3 +159,4 @@ const App = () => {
 
 export default App;
 
+// .toUpperCase()
