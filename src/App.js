@@ -104,7 +104,7 @@ const App = () => {
     if (squares[0][2].value === squares[1][1].value &&
       squares[1][1].value === squares[2][0].value &&
       squares[0][2].value !== '') {
-        return [squares][0][2].value
+        return squares[0][2].value
       }
 
     return null;
