@@ -3,10 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import Board from './Board';
 import { render, screen, fireEvent} from '@testing-library/react'
 
-
-describe('Wave 1: Board', () => {
-  // Sample input to the Board component
-  const SAMPLE_BOARD = [
+const SAMPLE_BOARD = [
     [
       {
         value: 'X',
@@ -50,6 +47,10 @@ describe('Wave 1: Board', () => {
       },
     ],    
   ];
+  
+describe('Wave 1: Board', () => {
+  // Sample input to the Board component
+  
 
   test('that board will render with the proper number of Xs and Os', () => {
     // Act
