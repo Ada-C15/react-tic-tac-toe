@@ -21,16 +21,3 @@ Square.propTypes = {
 };
 
 export default Square;
-
-
-// return (
-//   <button
-//     data-hover={`Vote! ${props.votes}`}
-//     onClick={() => props.onClickCallback(props.id)}
-//   >
-//     <div>
-//       {props.name} Votes: {props.votes}
-//     </div>
-//   </button>
-// );
-// };

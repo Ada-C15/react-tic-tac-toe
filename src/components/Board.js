@@ -13,7 +13,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
   let flatArr = [];
 
   for(let i=0; i < squares.length; i++) {
-    flatArr = flatArr.concat(squares[i]);
+    flatArr = flatArr.concat(squares[i]); 
   };
 
   return flatArr.map((square) => {
@@ -23,7 +23,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
+  // console.log(squareList);
   return <div className="grid" >
     {squareList}
   </div>

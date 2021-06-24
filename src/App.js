@@ -6,19 +6,6 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
-// const updateCandidate = (id) => {
-//   const updatedCandidates = [...liveCandidates];
-
-//   updatedCandidates.forEach((candidate) => {
-//     if (candidate.id === id) {
-//       candidate.votes += 1;
-//     }
-//   });
-
-//   setCandidates(updatedCandidates);
-// };
-
-
 const generateSquares = () => {
   const squares = [];
 
@@ -42,7 +29,6 @@ const App = () => {
 
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
-  const [squares, setSquares] = useState(generateSquares());
 
 
   // Wave 2
@@ -54,7 +40,39 @@ const App = () => {
   // J: call set squares with that new value
   // J: only affect the data, don't touch UI, react does
   // J: find element with square.id (square is const)
-  // setSquares will render new board with data
+  // J: setSquares will render new board with data
+
+  // const [squares, setSquares] = useState(generateSquares());
+  const [currentPlayer, setNextPlayer] = useState('o'); 
+
+  const togglePlayer = () => {
+
+    const currentLetter = (currentPlayer === 'x' ? 'o' : 'x');
+    setNextPlayer(currentLetter);
+
+    return currentLetter;
+
+  };
+
+  // const playerLetter = currentPlayer ? 'X' : 'O';
+
+  // const updatePlayer = () => {
+
+  //     const togglePlayer = () => {
+  //       nextPlayer(!currentPlayer);
+  //     };
+
+  //     const playerLetter = currentPlayer ? 'X' : 'O';
+
+  //     // if (currentPlayer === 'X') {
+  //     //   changePlayer(currentPlayer = 'O');
+  //     // } else {
+  //     //   changePlayer('X');
+  //     // };
+      
+  //   };
+
+  const [squares, setSquares] = useState(generateSquares());
 
   const updateSquare = (squareID) => {
 
@@ -62,8 +80,13 @@ const App = () => {
       for(let j=0; j < squares[i].length; j++) {
 
         if (squareID === squares[i][j]['id']) {
-          squares[i][j]['value'] = 'X'; 
-        };
+          if (squares[i][j]['value']) {
+            return;
+          }
+
+          squares[i][j]['value'] = togglePlayer(); // pass in value for whoever is playing
+        }
+        
 
       };
 
@@ -71,7 +94,7 @@ const App = () => {
 
     };
 
-    console.log(squares)
+    // console.log(squares)
   }
 
 
