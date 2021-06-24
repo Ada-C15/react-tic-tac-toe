@@ -65,6 +65,7 @@ const App = () => {
 
     setSquares(newSquares);
     // something is going on with checkForWinner where it's not setting to null
+    console.log(checkForWinner())
     setWinner(checkForWinner());
   }
 
@@ -87,7 +88,8 @@ const App = () => {
     // vertical cases
     for (let i = 0; i < 3; i++) {
       if (squares[0][i].value === squares[1][i].value &&
-        squares[1][i].value === squares[2][i].value) {
+        squares[1][i].value === squares[2][i].value &&
+        squares[0][i] !== '') {
           return squares[0][i].value
         }
     }
@@ -95,18 +97,21 @@ const App = () => {
     // horizontal cases
     for (let i = 0; i < 3; i++) {
       if (squares[i][0].value === squares[i][1].value &&
-        squares[i][1].value === squares[i][2].value) {
+        squares[i][1].value === squares[i][2].value &&
+        squares[0][i] !== '') {
           return squares[i][0].value
         }
     }
 
     // diagonal cases
     if (squares[0][0].value === squares[1][1].value &&
-      squares[1][1].value === squares[2][2].value) {
+      squares[1][1].value === squares[2][2].value &&
+      squares[0][0] !== '') {
         return squares[0][0].value
       }
     if (squares[0][2].value === squares[1][1].value &&
-      squares[1][1].value === squares[2][0].value) {
+      squares[1][1].value === squares[2][0].value &&
+      squares[0][2] !== '') {
         return [squares][0][2].value
       }
 
@@ -126,6 +131,8 @@ const App = () => {
     }
     else if (winner === 'x' || winner === 'o') {
       return (`Winner is ${winner}`)
+    } else {
+      return ('Broke!')
     }
   }
 
