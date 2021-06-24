@@ -25,19 +25,15 @@ const generateSquares = () => {
 
   return squares;
 }
+
 let turn = PLAYER_1;
 
 const App = () => {
-
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
-
-  // const updateGame = (id) => {
-  //   console.log('here', id);
-  // };
     const [squares, setSquares] = useState(generateSquares());
     const updateGame = (id) => {
-      console.log('here', id);
+      // console.log('here', id);
       const updatedSquares = [];
       squares.flat().forEach((square) => {
         if (square.id === id && square.value === '') {
@@ -52,7 +48,6 @@ const App = () => {
       });
       setSquares(updatedSquares);
     };
-    
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
