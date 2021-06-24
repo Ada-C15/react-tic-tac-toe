@@ -9,12 +9,14 @@ const Square = (props) => {
   //  component when it's clicked on.
 
   const addId = (props) => {
+    // alert(props.id);
+    // console.log(props.id);
     props.onClickCallback(props.id)
   };
 
   return <button
     className="square"
-    onClick={addId}
+    onClick={() => addId(props)}
   >
     {props.value}
   </button>
