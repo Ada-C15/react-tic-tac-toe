@@ -40,12 +40,30 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   // send in new board list below
-  const updateSquareData = (id, value) => {
-    console.log('hi', id, value)
+  const updateSquareData = (id) => {
+    for (let row = 0; row < 3; row += 1) {
+      for (let col = 0; col < 3; col += 1) {
+        let square = squares[row][col]
+        if (square.id === id) {
+          if (xPlayer === true) {
+            square.value = 'X'
+            setNext(false)
+          }
+          else {
+            square.value = 'O'
+            setNext(true)
+          }
+        }
+      }
+    }
     setSquares(squares)
-    setNext(!setNext)
 
+    // console.log('hi', id, value)
+    // setSquares(squares)
+    // setNext(!setNext)
   }
+
+
 
   // const updatedSquares = squares.map(square => {
   //   if (square.id === updatedSquare.id) {
