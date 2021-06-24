@@ -5,20 +5,9 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // let singleArray=[]
-
-  // for (let i = 0; i < squares.length; i++) {
-  //   singleArray = singleArray.concat(squares[i]);
-  // }
-  // const singleArray = [].concat(squares);
+  // use spread
   const singleArray = [].concat(...squares);
 
-  console.log(squares);
-  console.log(singleArray);
-  // Complete this for Wave 1
-  // squares is a 2D Array, but 
-  //  you need to return a 1D array
-  //  of square components
   return singleArray.map((square) => {
     return <Square
       key={square.id}
