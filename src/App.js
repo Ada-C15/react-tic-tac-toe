@@ -29,10 +29,11 @@ const generateSquares = () => {
 }
 
 const App = () => {
-
+  
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
+  // this starts state of what turn it is and set turn will increase
   const [turn, setTurn] = useState(0);
   
   // Wave 2
@@ -40,8 +41,12 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const setValue = (id) => {
+    // checking the event details
     console.log(`id = ${id}`)
     
+    //  to determine the position of the board user is clicking since
+    // each square has an id and,
+    // given it's a 2D array:
     const row = Math.floor(id / 3);
     const col = id % 3
     if(squares[row][col].value === ''){
@@ -52,10 +57,11 @@ const App = () => {
         player = PLAYER_2
       }
       console.log(`player = ${player}`)
+      // spread to create a copy of squares
       const newSquares = [...squares];
       // putting it where it goes (behind the scenes)
       newSquares[row][col].value = player;
-      // updates the state of squares and turn
+      // and then updates the state of squares and turn
       setSquares(newSquares);
       setTurn(turn+1);
       console.log(newSquares)
