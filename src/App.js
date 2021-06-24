@@ -31,11 +31,41 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
+  const [currentPlayer, changePlayer] = useState(PLAYER_1)
+
   // Wave 2
+  const makeMove = (id, currentPlayer) => {
+    if (id == 0) {
+      squares[0][0].value = currentPlayer;
+    } else if (id == 1) {
+      squares[0][1].value = currentPlayer;
+    } else if (id == 2) {
+      squares[0][2].value = currentPlayer;
+    } else if (id == 3) {
+      squares[1][0].value = currentPlayer;
+    } else if (id == 4) {
+      squares[1][1].value = currentPlayer;
+    } else if (id == 5) {
+      squares[1][2].value = currentPlayer;
+    } else if (id == 6) {
+      squares[2][0].value = currentPlayer;
+    } else if (id == 7) {
+      squares[2][1].value = currentPlayer;
+    } else if (id == 8) {
+      squares[2][2].value = currentPlayer;
+    }
+  }
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
+  const switchTurns = () => {
+    if (currentPlayer == PLAYER_1) {
+      changePlayer(PLAYER_2);
+    } else {
+      changePlayer(PLAYER_1);
+    }
+  }
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -62,7 +92,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={ squares } onClickCallback={ makeMove } />
       </main>
     </div>
   );
