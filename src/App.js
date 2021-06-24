@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
+import Square from './components/Square';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
@@ -26,14 +27,25 @@ const generateSquares = () => {
 }
 
 const App = () => {
-
-  const updateGame = (id) => {
-    console.log('here', id);
-  };
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
-  const [squares, setSquares] = useState(generateSquares());
-  
+
+  // const updateGame = (id) => {
+  //   console.log('here', id);
+  // };
+    const [squares, setSquares] = useState(generateSquares());
+    const updateGame = (id) => {
+      console.log('here', id);
+      const updatedSquares = [];
+      squares.flat().forEach((square) => {
+        if (square.id === id && square.value === '') {
+          square.value = 'X';
+        }
+        updatedSquares.push(square);
+      });
+      setSquares(updatedSquares);
+    };
+    
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
