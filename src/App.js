@@ -21,9 +21,11 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
+  console.log(squares)
   return squares;
 }
+
+
 
 const App = () => {
 
@@ -62,7 +64,9 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board 
+        squares={squares} 
+        onClickCallback= { somefunction }/>
       </main>
     </div>
   );
