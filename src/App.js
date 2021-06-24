@@ -30,12 +30,9 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
-  // console.log(squares);
   const [player, setPlayer] = useState(PLAYER_1);
-  // why does clicking in the first or last box first set winner to 'undefined'?
   const [winner, setWinner] = useState(null);
   const [squaresFilled, setSquaresFilled] = useState(0);
-  // Will we need to make more variables to track state here? Player1/Player2, winner/noWinner?
 
   // Wave 2
   // You will need to create a method to change the square
@@ -43,7 +40,7 @@ const App = () => {
   //   Then pass it into the squares as a callback
 
   const changeSquares = (id) => {
-    // Does the ... clone squares into a new array?
+    if (winner === null) {
     const newSquares = [...squares];
 
     // could I repeat the same logic I used to make a 1D array in Board here?
@@ -64,9 +61,8 @@ const App = () => {
     })
 
     setSquares(newSquares);
-    // something is going on with checkForWinner where it's not setting to null
-    console.log(checkForWinner())
     setWinner(checkForWinner());
+    }
   }
 
   const checkForWinner = () => {
@@ -81,15 +77,11 @@ const App = () => {
     // 3. Go across each diagonal to see if
     //    all three squares have the same value.
 
-    // something freaky is going on with the last box
-    // Three xs on bottom row not being identified as a winner
-    ///
-
     // vertical cases
     for (let i = 0; i < 3; i++) {
       if (squares[0][i].value === squares[1][i].value &&
         squares[1][i].value === squares[2][i].value &&
-        squares[0][i] !== '') {
+        squares[0][i].value !== '') {
           return squares[0][i].value
         }
     }
@@ -98,7 +90,7 @@ const App = () => {
     for (let i = 0; i < 3; i++) {
       if (squares[i][0].value === squares[i][1].value &&
         squares[i][1].value === squares[i][2].value &&
-        squares[0][i] !== '') {
+        squares[i][0].value !== '') {
           return squares[i][0].value
         }
     }
@@ -106,24 +98,20 @@ const App = () => {
     // diagonal cases
     if (squares[0][0].value === squares[1][1].value &&
       squares[1][1].value === squares[2][2].value &&
-      squares[0][0] !== '') {
+      squares[0][0].value !== '') {
         return squares[0][0].value
       }
     if (squares[0][2].value === squares[1][1].value &&
       squares[1][1].value === squares[2][0].value &&
-      squares[0][2] !== '') {
+      squares[0][2].value !== '') {
         return [squares][0][2].value
       }
 
     return null;
-    // something about this last return statement isn't right
   }
 
-  // console.log(checkForWinner())
-
-  // something about this function isn't right, either
   const printWinner = () => {
-    if (winner === null && squaresFilled === 9){
+    if (winner === null && squaresFilled === 9) {
       return (`It's a tie!`)
     }
     else if (winner === null) {
@@ -131,8 +119,6 @@ const App = () => {
     }
     else if (winner === 'x' || winner === 'o') {
       return (`Winner is ${winner}`)
-    } else {
-      return ('Broke!')
     }
   }
 
