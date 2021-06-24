@@ -6,6 +6,19 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
+// const updateCandidate = (id) => {
+//   const updatedCandidates = [...liveCandidates];
+
+//   updatedCandidates.forEach((candidate) => {
+//     if (candidate.id === id) {
+//       candidate.votes += 1;
+//     }
+//   });
+
+//   setCandidates(updatedCandidates);
+// };
+
+
 const generateSquares = () => {
   const squares = [];
 
@@ -31,10 +44,36 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
+
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+
+  // J: make a change to squares (change internal data representation)
+  // J: call set squares with that new value
+  // J: only affect the data, don't touch UI, react does
+  // J: find element with square.id (square is const)
+  // setSquares will render new board with data
+
+  const updateSquare = (squareID) => {
+
+    for(let i=0; i < squares.length; i++) {
+      for(let j=0; j < squares[i].length; j++) {
+
+        if (squareID === squares[i][j]['id']) {
+          squares[i][j]['value'] = 'X'; 
+        };
+
+      };
+
+    setSquares(squares);
+
+    };
+
+    console.log(squares)
+  }
+
 
 
   const checkForWinner = () => {
@@ -62,7 +101,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquare}/>
       </main>
     </div>
   );

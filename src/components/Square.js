@@ -8,11 +8,10 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
 
-  return <button
-    className="square"
-  >
-    {props.value}
-  </button>
+  // onClick={() => props.onClickCallback(props.id)}
+  // onClickCallback={onClickCallback}
+
+  return <button className="square" onClick={() => props.onClickCallback(props.id)}>{props.value}</button>
 }
 
 Square.propTypes = {
@@ -22,3 +21,16 @@ Square.propTypes = {
 };
 
 export default Square;
+
+
+// return (
+//   <button
+//     data-hover={`Vote! ${props.votes}`}
+//     onClick={() => props.onClickCallback(props.id)}
+//   >
+//     <div>
+//       {props.name} Votes: {props.votes}
+//     </div>
+//   </button>
+// );
+// };
