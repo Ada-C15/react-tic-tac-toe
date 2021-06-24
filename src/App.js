@@ -27,8 +27,8 @@ const generateSquares = () => {
 
 const App = () => {
 
-  const updateGame = () => {
-    console.log('here');
+  const updateGame = (id) => {
+    console.log('here', id);
   };
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
