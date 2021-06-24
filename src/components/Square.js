@@ -5,6 +5,13 @@ import './Square.css'
 
 const Square = (props) => {
   
+  const spaceButtonClick =() => {
+    const updatedSquare = {
+      id: props.id,
+      value: props.currPlayer,
+    };
+    props.onClickCallback(updatedSquare)
+  }
 
   // For Wave 1 enable this 
   //  Component to alert a parent 
@@ -13,7 +20,9 @@ const Square = (props) => {
 
       //pass parent state modifier
 
-  return <button className="square" id={props.id}>
+  return <button className="square" 
+          id={props.id}
+          onClick={spaceButtonClick}>
             {props.value}
         </button>
 };

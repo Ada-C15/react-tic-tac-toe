@@ -9,7 +9,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
   
   return (flatarr.map(square => {
     return (
-      <li><Square id={square.id} value ={square.value} onClick={onClickCallback}></Square></li>
+      <Square id={square.id} value ={square.value} onClickCallback={onClickCallback}></Square>
     );
   }));
   // Complete this for Wave 1
