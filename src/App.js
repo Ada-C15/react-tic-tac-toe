@@ -25,8 +25,10 @@ const generateSquares = () => {
 
   return squares;
 }
+let turn = PLAYER_1;
 
 const App = () => {
+
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
 
@@ -39,7 +41,12 @@ const App = () => {
       const updatedSquares = [];
       squares.flat().forEach((square) => {
         if (square.id === id && square.value === '') {
-          square.value = 'X';
+          square.value = turn; 
+          if (turn === PLAYER_1) {  
+            turn = PLAYER_2;
+          } else if (turn === PLAYER_2){
+            turn = PLAYER_1;
+          }
         }
         updatedSquares.push(square);
       });
