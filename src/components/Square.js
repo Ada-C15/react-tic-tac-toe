@@ -8,9 +8,12 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
 
+  
+
   return <button
     className="square"
   >
+    
     {props.value}
   </button>
 }
