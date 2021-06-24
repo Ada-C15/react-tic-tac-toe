@@ -31,10 +31,34 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
+
+  //  State: 1 for keeping count of which square index has been clicked,
+  //  1 for keeping track of which player_1 (X) or player_2 (O) is clicking which square
+  //  1 for how many squares are filled, the game has to stop once 9 squares have been filled
+  //  1 for the winner, to set either player_1 or player_2 equal to winner 
+
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  // const [numSquaresFilled, setNumSquaresFilled] = useState(0);
+  // const [winner, setWinner] = userState(null);
+
+
+
   // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  // You will need to create a method to change the square When it is clicked on then pass it into the squares as a callback
+  const updateSquares = (updatedSquare) => {
+
+    
+    //  check who the current player is
+    if (currentPlayer == PLAYER_1) {
+      setCurrentPlayer(PLAYER_2);
+    } else {
+      setCurrentPlayer(PLAYER_1);
+    };
+
+    // 
+
+
+  }
 
 
   const checkForWinner = () => {
@@ -62,7 +86,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquares} />
       </main>
     </div>
   );

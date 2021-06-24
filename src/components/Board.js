@@ -20,10 +20,11 @@ const generateSquareComponents = (squares, onClickCallback) => {
   // map iterates through each index of squareOneD
   //  it sets the values to the props: id, value and onClickCallback
   return squareOneD.map((square, index) => {
-    return <Square key={index} id={square.id} value={square.value} onClickCallback={onClickCallback}></Square>
+    return <Square key={index} id={square.id} value={square.value} onClickCallback={onClickCallback} />
     console.log(`this makes the square grid`);
   });
   
+  // DONE 
   // Complete this for Wave 1
   // squares is a 2D Array, but 
   //  you need to return a 1D array

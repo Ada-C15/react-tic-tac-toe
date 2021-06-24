@@ -10,12 +10,9 @@ const Square = (props) => {
 
 
 
-  return <button
-    className="square"
-  >
-    {props.value}
-  </button>
-}
+  return <button className="square" onClick={() => props.onClickCallback(props.id)}>{props.value}</button>
+  {/* {props.value} */}
+};
 
 Square.propTypes = {
   value: PropTypes.string.isRequired,
