@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -55,13 +55,13 @@ const App = () => {
 
   const updateGameState = (id) => {
     const updatedSquares = squares.map((square) => square)
-
     for (let row = 0; row < 3; row += 1) {
       for (let col = 0; col < 3; col += 1) {
         let currentSquare = updatedSquares[row][col];
         if (currentSquare.id === id) {
+          if (currentSquare.value) return; // clicking on the same square twice doesn't change things
           currentSquare.value = activePlayer;
-          // toggle the player
+          // toggle the player after each players move
           if (activePlayer === PLAYER_1) {
             setActivePlayer(PLAYER_2);
           } else {
