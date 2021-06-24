@@ -32,89 +32,51 @@ const App = () => {
     setTurn(turn)
   }
   const [squares, setSquares] = useState(generateSquares());
+  const [turnCount, setTurnCount] = useState(0)
   const updateSquares = (id) => {
     let newSquares = squares.slice();
     newSquares.flat()[id].value = userTurn
+    newSquares.flat()[id].disabled = true
+    if (!winner && turnCount < 8) {
     setSquares(newSquares)
     updateTurn()
     updateWinner(squares)
-    
-  }
-
-  const [winner, setWinner] = useState('...');
-  const updateWinner = (squares) => {
-    let winners = []
-    if (squares[0][0].value === squares[0][1].value && squares[0][1].value === squares[0][2].value && squares[0][2] !== ''){
-      winners.push(squares[0][0].value)
-    } else if (squares[1][0].value === squares[1][1].value && squares[1][1].value === squares[1][2].value && squares[1][2] !== ''){
-      winners.push(squares[1][0].value)
-    } else if (squares[2][0].value === squares[2][1].value && squares[2][1].value === squares[2][2].value && squares[2][2] !== ''){
-      winners.push(squares[2][0].value)
-    } else if (squares[0][0].value === squares[1][0].value && squares[1][0].value === squares[2][0].value && squares[2][0] !== ''){
-      winners.push(squares[0][0].value)
-    } else if (squares[0][1].value === squares[1][1].value && squares[1][1].value === squares[2][1].value && squares[2][1] !== ''){
-      winners.push(squares[0][1].value)
-    } else if (squares[0][2].value === squares[1][2].value && squares[1][2].value === squares[2][2].value && squares[2][2] !== ''){
-      winners.push(squares[0][2].value)
-    } else if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value && squares[2][2] !== ''){
-      winners.push(squares[0][0].value)
-    } else if (squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value && squares[2][0] !== ''){
-      winners.push(squares[0][2].value)
-    } if (winners.length === 1){
-      return winners.join('')
-    }else {
-      return 'Nobody!'
+    setTurnCount(turnCount + 1)
+    } else {
+      setWinner('nobody')
     }
+}
+  const [winner, setWinner] = useState('')
+  const updateWinner = (squares) => {
+    if (squares[0][0].value === squares[0][1].value && squares[0][1].value === squares[0][2].value && squares[0][2] !== ''){
+      setWinner(squares[0][0].value)
+    } else if (squares[1][0].value === squares[1][1].value && squares[1][1].value === squares[1][2].value && squares[1][2] !== ''){
+      setWinner(squares[1][0].value)
+    } else if (squares[2][0].value === squares[2][1].value && squares[2][1].value === squares[2][2].value && squares[2][2] !== ''){
+      setWinner(squares[2][0].value)
+    } else if (squares[0][0].value === squares[1][0].value && squares[1][0].value === squares[2][0].value && squares[2][0] !== ''){
+      setWinner(squares[0][0].value)
+    } else if (squares[0][1].value === squares[1][1].value && squares[1][1].value === squares[2][1].value && squares[2][1] !== ''){
+      setWinner(squares[0][1].value)
+    } else if (squares[0][2].value === squares[1][2].value && squares[1][2].value === squares[2][2].value && squares[2][2] !== ''){
+      setWinner(squares[0][2].value)
+    } else if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value && squares[2][2] !== ''){
+      setWinner(squares[0][0].value)
+    } else if (squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value && squares[2][0] !== ''){
+      setWinner(squares[0][2].value)
+    } 
   }
-
-  //   let map = {
-  //     'X':[],
-  //     'O':[]
-  //   }
-  //   let squareArray = squares.flat();
-  //   squareArray.forEach(letter => {
-  //     if(letter['value'] === 'X') {
-  //       map['X'].push(letter['id'])
-  //     } else if(letter['value'] === 'O'){
-  //       map['O'].push(letter['id'])
-  //     } console.log(map)
-  //   })
-  //   for(let letter in map) {
-  //     let indexes= Object.values(map[letter].values);
-  //     console.log(indexes)
-  //     if (0 in indexes && 1 in indexes && 2 in indexes) {
-  //       setWinner(letter)
-  //     } else if (0 in indexes && 4 in indexes && 8 in indexes){
-  //       setWinner(letter)
-  //     }
-      
-  //   }
-  // }
-
-
-    
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
-
-  // 
 
   const resetGame = () => {
     setSquares(generateSquares())
-    setWinner('...')
+    setWinner('')
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is {updateWinner(squares)} </h2>
+        <h2>Winner is {winner} </h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
