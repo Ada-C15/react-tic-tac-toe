@@ -26,9 +26,9 @@ const generateSquares = () => {
 }
 
 const App = () => {
-  const [userTurn, setTurn] = useState('X')
+  const [userTurn, setTurn] = useState('x')
   const updateTurn = () => {
-    let turn = (userTurn === 'X') ? 'O' : 'X';
+    let turn = (userTurn === 'x') ? 'o' : 'x';
     setTurn(turn)
   }
   const [squares, setSquares] = useState(generateSquares());
@@ -37,12 +37,13 @@ const App = () => {
     let newSquares = squares.slice();
     newSquares.flat()[id].value = userTurn
     newSquares.flat()[id].disabled = true
+    console.log(turnCount)
     if (!winner && turnCount < 8) {
     setSquares(newSquares)
     updateTurn()
     updateWinner(squares)
     setTurnCount(turnCount + 1)
-    } else {
+    } else if (!winner && turnCount === 8) {
       setWinner('nobody')
     }
 }
@@ -70,6 +71,7 @@ const App = () => {
   const resetGame = () => {
     setSquares(generateSquares())
     setWinner('')
+    setTurnCount(0)
   }
 
   return (
