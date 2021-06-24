@@ -31,6 +31,7 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
+
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
