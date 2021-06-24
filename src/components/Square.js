@@ -2,18 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Square.css'
-
+// square has the ability to detect being clicked and to pass up its values
 const Square = (props) => {
-  // For Wave 1 enable this 
-  //  Component to alert a parent 
-  //  component when it's clicked on.
 
-  return <button
-    className="square"
-  >
-    {props.value}
-  </button>
-}
+ const handleClick = () => {
+    props.onClickCallback()
+  }
+    console.log(props)
+  return (
+  <button className="square" onClick={handleClick} >s</button>
+  )};
 
 Square.propTypes = {
   value: PropTypes.string.isRequired,

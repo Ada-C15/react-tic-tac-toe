@@ -5,7 +5,7 @@ import Board from './components/Board';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
-
+//generates a 2D array of objects, when the user clicks their value gets populated. this is how we are keeping track of the state of the game. What does this array look like?
 const generateSquares = () => {
   const squares = [];
 
@@ -27,10 +27,30 @@ const generateSquares = () => {
 
 const App = () => {
 
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
-  const [squares, setSquares] = useState(generateSquares());
+  // state keeping track of current board
+  const [squares, setSquareValue] = useState(generateSquares());
+  
+  console.log(squares)
+    //event handler to update the state, value, of a square when it is clicked on 
+    const updateSquare = () => {
+      console.log('clicked')
+    }
+   
+    //state to keep track of currentPlayer
+   const [currentPlayer, changePlayer] = useState(PLAYER_1);
+   const rotatePlayer = () => {
+     let player = ''
+     if (currentPlayer === PLAYER_1){
+       player = PLAYER_2
+     } else if ( currentPlayer === PLAYER_2);{
+       player = PLAYER_1
+     }
+     
+     changePlayer(player)
+   }
+  
 
+   
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
@@ -62,7 +82,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquare}/>
       </main>
     </div>
   );
