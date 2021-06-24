@@ -42,11 +42,54 @@ const App = () => {
   }
 
   const [winner, setWinner] = useState('...');
-  const updateWinner = () => {
-    setWinner('X');
-    console.log(winner)
+  const updateWinner = (squares) => {
+    let winners = []
+    if (squares[0][0].value === squares[0][1].value && squares[0][1].value === squares[0][2].value && squares[0][2] !== ''){
+      winners.push(squares[0][0].value)
+    } else if (squares[1][0].value === squares[1][1].value && squares[1][1].value === squares[1][2].value && squares[1][2] !== ''){
+      winners.push(squares[1][0].value)
+    } else if (squares[2][0].value === squares[2][1].value && squares[2][1].value === squares[2][2].value && squares[2][2] !== ''){
+      winners.push(squares[2][0].value)
+    } else if (squares[0][0].value === squares[1][0].value && squares[1][0].value === squares[2][0].value && squares[2][0] !== ''){
+      winners.push(squares[0][0].value)
+    } else if (squares[0][1].value === squares[1][1].value && squares[1][1].value === squares[2][1].value && squares[2][1] !== ''){
+      winners.push(squares[0][1].value)
+    } else if (squares[0][2].value === squares[1][2].value && squares[1][2].value === squares[2][2].value && squares[2][2] !== ''){
+      winners.push(squares[0][2].value)
+    } else if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value && squares[2][2] !== ''){
+      winners.push(squares[0][0].value)
+    } else if (squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value && squares[2][0] !== ''){
+      winners.push(squares[0][2].value)
+    } if (winners.length === 1){
+      return winners.join('')
+    }else {
+      return 'Nobody!'
+    }
   }
 
+  //   let map = {
+  //     'X':[],
+  //     'O':[]
+  //   }
+  //   let squareArray = squares.flat();
+  //   squareArray.forEach(letter => {
+  //     if(letter['value'] === 'X') {
+  //       map['X'].push(letter['id'])
+  //     } else if(letter['value'] === 'O'){
+  //       map['O'].push(letter['id'])
+  //     } console.log(map)
+  //   })
+  //   for(let letter in map) {
+  //     let indexes= Object.values(map[letter].values);
+  //     console.log(indexes)
+  //     if (0 in indexes && 1 in indexes && 2 in indexes) {
+  //       setWinner(letter)
+  //     } else if (0 in indexes && 4 in indexes && 8 in indexes){
+  //       setWinner(letter)
+  //     }
+      
+  //   }
+  // }
 
 
     
@@ -64,13 +107,14 @@ const App = () => {
 
   const resetGame = () => {
     setSquares(generateSquares())
+    setWinner('...')
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is {winner} </h2>
+        <h2>The winner is {updateWinner(squares)} </h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
