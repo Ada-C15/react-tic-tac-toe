@@ -15,8 +15,8 @@ const generateSquareComponents = (squares, onClickCallback) => {
     flatArray = flatArray.concat(squares[i]);
   }
   // How to I flatten squares to get an array of all ids and values?
-  const squareComponents = flatArray.map(square => {
-    return <Square id={square.id} value={square.value} onClickCallback={onClickCallback}></Square>
+  const squareComponents = flatArray.map((square) => {
+    return <Square key={square.id} value={square.value} id={square.id} onClickCallback={onClickCallback}></Square>
   })
 
   // console.log('This is the flattened array:', flatArray)
@@ -45,7 +45,7 @@ Board.propTypes = {
       })
     )
   ),
-  onClickCallback: PropTypes.func.isRequired,
+  onClickCallback: PropTypes.func.isRequired
 };
 
 export default Board;
