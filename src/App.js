@@ -42,16 +42,16 @@ const App = () => {
     for (let row = 0; row < 3; row++) {
       currentGame.push([]);
       for (let col = 0; col < 3; col++) {
-        if (squares[row][col].id === {updateId}) {
-          currentGame.push({
+        if (squares[row][col].id === updateId) {
+          currentGame[row].push({
             id: updateId,
             value: (spacesLeft % 2) ? PLAYER_1 : PLAYER_2,
-          })
+          });
         }
         else {
-          currentGame.push(squares[row][col]);
-        }
-      }
+          currentGame[row].push(squares[row][col]);
+        };
+      };
     }
 
     setSquares(currentGame);
