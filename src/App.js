@@ -16,7 +16,7 @@ const generateSquares = () => {
     for (let col = 0; col < 3; col += 1) {
       squares[row].push({
         id: currentId,
-        value: '',
+        value: 'D',
       });
       currentId += 1;
     }
