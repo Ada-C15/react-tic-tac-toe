@@ -10,17 +10,15 @@ const Square = (props) => {
   const onSquareClick = () => {
     const updateSquare = {
       id: props.id,
-      value:props.value
     }
     props.onClickCallback(updateSquare);
   }
 
 
-  return <button
-    className="square"
-    // added here
+  return <button 
+    className="square" 
     onClick={onSquareClick}
-  > 
+    > 
     {props.value}
   </button>
 }
