@@ -22,13 +22,17 @@ const generateSquares = () => {
     }
   }
 
+  console.log(squares)
   return squares;
 }
 
 const App = () => {
 
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
+  // ✅ Wave 1: Represents the state of the game board in a 2D array of objects 
+  // ✅ Wave 1: Use the helper function `generateSquares`  to create the initial value of board state
+
+  // Remember this referece syntax:
+  // const [pieceOfState, setPieceOfState] = useState('Initial value for pieceOfState.');
   const [squares, setSquares] = useState(generateSquares());
 
   // Wave 2
@@ -54,6 +58,7 @@ const App = () => {
     // Complete in Wave 4
   }
 
+    // ✅ Wave 1: Renders a `Board` component
   return (
     <div className="App">
       <header className="App-header">
