@@ -8,6 +8,10 @@ const generateSquareComponents = (squares, onClickCallback) => {
   // squares is a 2D Array, but
   //  you need to return a 1D array
   //  of square components
+  // witht he id ur going to detect if a square componet has been clicked, and grab the id and mark it as x or o
+  // create a variable to hold current move and assign to x or o - boolean to switch or create a variable that gets reassign
+  // use useState to represent the current player
+  // onClick call back prop is a function and that function will go ahead and determine who the player is and how to mark the square
   return squares.map((row) => {
     return row.map((square) => (
       <Square
@@ -19,10 +23,9 @@ const generateSquareComponents = (squares, onClickCallback) => {
     ))
   })
 }
-
+//  could write onClickCallback logic here
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback)
-  console.log(squareList)
   return <div className="grid">{squareList}</div>
 }
 
