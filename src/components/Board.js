@@ -9,14 +9,29 @@ const generateSquareComponents = (squares, onClickCallback) => {
   // squares is a 2D Array, but 
   //  you need to return a 1D array
   //  of square components
-
+  // I think I need to use .concat() function
+  // const singleArraySquares = [].concat(squares);
+  // return singleArraySquares.map((square) => {
+  //   return <Square 
+  //   value={square.value}
+  //   id={square.id}
+  //   onCLickCallback={onClickCallback}
+  //   key={square.id}
+  //   />
+  // })
+  const flatGrid = [];
+  for (let row = 0; row < 3; row += 1) {
+    for (let col = 0; col < 3; col += 1) {
+      flatGrid.push(squares[row][col]);
+    }
+  } return flatGrid;
 }
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
   console.log(squareList);
   return <div className="grid" >
-    {squareList}
+    {squareList.map(square => <Square key={square.id} id={square.id} value={square.value}/>)}
   </div>
 }
 
