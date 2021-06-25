@@ -26,17 +26,9 @@ const generateSquares = () => {
 
 const App = () => {
 
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
-  const [numSquaresFilled, setNumSquaresFilled] = useState(0);
-  const [winner, setWinner] = useState(null);
-
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  const [winner, setWinner] = useState('');
   const updateSquares = (id) => {
     // if winner, exit.
     if (winner === PLAYER_1 || winner === PLAYER_2) return;
@@ -50,18 +42,10 @@ const App = () => {
       while (col < 3 && !filled) {
         let currentSquare = newSquares[row][col];
         if (currentSquare.id === id) {
-          console.log(currentSquare);
           if (currentSquare.value !== '') return;
-
           filled = true;
           currentSquare.value = currentPlayer;
-          setNumSquaresFilled(numSquaresFilled + 1);
-
-          if (currentPlayer === PLAYER_1) {
-            setCurrentPlayer(PLAYER_2)
-          } else {
-            setCurrentPlayer(PLAYER_1);
-          }
+          setCurrentPlayer(currentPlayer === PLAYER_1 ? PLAYER_2 : PLAYER_1)  
         }
         col += 1;
       }
@@ -73,15 +57,6 @@ const App = () => {
   }
 
   const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
       let i = 0;
   
       while (i < 3) {
@@ -113,7 +88,6 @@ const App = () => {
   const resetGame = () => {
     setSquares(generateSquares());
     setCurrentPlayer('o');
-    setNumSquaresFilled(0);
     setWinner(null);
   }
 

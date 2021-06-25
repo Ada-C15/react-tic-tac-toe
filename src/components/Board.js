@@ -10,7 +10,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
   for (let i = 0; i < squares.length; i++) {
     singleArray = singleArray.concat(squares[i]);
   }
-  // const singleArray = [].concat(...squares);
 
   return singleArray.map((square) => {
     return <Square
