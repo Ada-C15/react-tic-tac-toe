@@ -40,15 +40,16 @@ const App = () => {
     const newBoard = [...squares]
     const row = Math.floor(squareToUpdate.id/3)
     const colume = squareToUpdate.id%3
-    
+
     squareToUpdate.value = currentPlayer
     newBoard[row][colume] = squareToUpdate
-    
-    if (currentPlayer === 'X') {
+    if (currentPlayer.value !== '') {
+      if (currentPlayer === 'X') {
         setCurrentPlayer(PLAYER_2);
     } else {
       setCurrentPlayer(PLAYER_1)
     };
+    }
     setSquares(newBoard)
   }
   
