@@ -40,8 +40,7 @@ const App = () => {
       let row = newBoard[i];
       for (let j=0; j < row.length; j++) {
         if (newBoard[i][j].id === updatedSquare.id) {
-          // We only want to switch turns if the player has clicked on a valid square
-          if (newBoard[i][j] !== updatedSquare) switchTurns();
+          if (newBoard[i][j].value !== updatedSquare.value) switchTurns();
           newBoard[i][j] = updatedSquare;
           break;
         }

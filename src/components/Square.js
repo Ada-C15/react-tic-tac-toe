@@ -7,7 +7,7 @@ const Square = (props) => {
 
   const onSquareClick = () => {
     let newValue;
-    if (props.value === "") {
+    if (props.value === '') {
       newValue = props.currentPlayer;
     } else {
       newValue = props.value;
@@ -31,6 +31,7 @@ Square.propTypes = {
   value: PropTypes.string.isRequired,
   onClickCallback: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  currentPlayer: PropTypes.string.isRequired
 };
 
 export default Square;
