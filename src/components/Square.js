@@ -9,9 +9,7 @@ const Square = ({ id, value, onClickCallback }) => {
   //  component when it's clicked on.
 
 
-  return <button className="square" id={id} onClick={onClickCallback}>
-     {value}                                                 {/*^^ how to pass the value? to update state/ re-render it */}
-  </button>
+  return <button className="square" id={id} onClick={onClickCallback}>{value}</button>
 }
 
 Square.propTypes = {

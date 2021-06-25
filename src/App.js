@@ -3,7 +3,6 @@ import './App.css';
 import Board from './components/Board';
 // import Square from './components/Square';
 
-
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
@@ -22,7 +21,6 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-  console.log(squares);
   return squares;
 }
 
@@ -35,10 +33,8 @@ const App = () => {
   // Wave 2
   
   const onClickCallback = (event) => {
-    const existingButtonValue = event.target.value
-    console.log('event.target.id: ', event.target.id)
-    console.log('event.target.value: ', event.target.value)
-    if (existingButtonValue === '') {
+    const existingButtonInnerText = event.target.innerText
+    if (existingButtonInnerText === '') {
       const currentButtonId = event.target.id
       const row = Math.floor(currentButtonId / 3)
       const column = currentButtonId % 3
@@ -56,12 +52,13 @@ const App = () => {
 
       setSquares(newSquares)
 
-    // const setCurrentPlayer = PLAYER_1 ? PLAYER_2: PLAYER_1;
-    // OR //
-    if (currentPlayer === PLAYER_1){
-      setCurrentPlayer(PLAYER_2)
-    } else {
-      setCurrentPlayer(PLAYER_1)
+      // const setCurrentPlayer = PLAYER_1 ? PLAYER_2: PLAYER_1;
+      // OR //
+      if (currentPlayer === PLAYER_1){
+        setCurrentPlayer(PLAYER_2)
+      } else {
+        setCurrentPlayer(PLAYER_1)
+      }
     }
   }
     
