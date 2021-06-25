@@ -33,65 +33,65 @@ const App = () => {
   const [currentPlayer, setPlayer] = useState(PLAYER_1);
 
 
-  // Wave 2
+  
   // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  //  When it is clicked on.
+  //  Then pass it into the squares as a callback
+
+  // checks for wave 2 
   const squareUpdate = (id) => {
     const tempSquares = [];
     let currentId = 0;
+
     for (let row = 0; row < 3; row += 1) {
       tempSquares.push([]);
+
       for (let col = 0; col < 3; col += 1) {
         let squareVal = squares[row][col].value;
+
         if (currentId === id){
           squareVal=currentPlayer;
         }
+
         tempSquares[row].push({
           id: currentId,
           value: squareVal,
         });
+
         currentId += 1;
       }
     }
+
     setSquares(tempSquares);
     if (currentPlayer === PLAYER_1){
       setPlayer(PLAYER_2);
     }
+
     else if (currentPlayer === PLAYER_2){
       setPlayer(PLAYER_1);
 
     }
-  }
+  };
 
 
-
+  // Section for Wave 3
   const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go across each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
-
-    // 1. Go across each row to see if 3 squares in the same row match i.e. same value
     for (let row = 0; row < 3; row += 1) {
       let countRowX = 0;
       let countRowO = 0;
       let countColX = 0;
       let countColO = 0;
+
       for (let col = 0; col < 3; col += 1) {
-        // Rows
+
+        // 1. Go across each row to see if 3 squares in the same row match 
         if (squares[row][col].value === PLAYER_1){
           countRowX += 1;
         }
         else if (squares[row][col].value === PLAYER_2){
           countRowO += 1;
         }
-        // Columns
+        // Goes down each column to see if 3 squares in each column match
         if (squares[col][row].value === PLAYER_1){
           countColX += 1;
         }
@@ -107,21 +107,22 @@ const App = () => {
       }
     }
 
-    // 2. Go across each diagonal to see if all three squares have the same value.
+    // Goes across each diagonal to see if all three squares have the same value.
     let diagonalX = 0;
     let diagonalO = 0;
     let inverseDiagonalX = 0;
     let inverseDiagonalO = 0;
     const inverseIdx = 2;
     for (let idx = 0; idx < 3; idx += 1) {
-      // Diagonal
+
+      // checks diagonal to see if all three squares have the same value
       if (squares[idx][idx].value === PLAYER_1){
         diagonalX += 1;
       }
       else if (squares[idx][idx].value === PLAYER_2){
         diagonalO += 1;
       }
-      // Inverse Diagonal
+      // checks inverse diagonal
       if (squares[inverseIdx-idx][idx].value === PLAYER_1){
         inverseDiagonalX += 1;
       }
