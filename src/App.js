@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -31,27 +31,55 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
-
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
   const [turn, setTurn] = useState(true);
+  const [foundWinner, getWinner] = useState(false);
+  const [winner, showWinner] = useState('PLAY!!');
 
+
+  const updateSquare = (updatedSquare)=>{
+      if(foundWinner === false){
+        const nextSquare =[];
+        squares.forEach((row)=>{
+          const changeRow = [];
+          row.forEach((square)=>{
+            if(square.id===updatedSquare.id && turn===true && updatedSquare.value ===''){
+              updatedSquare.value = PLAYER_1;
+              changeRow.push(updatedSquare);
+            }
+            else if(square.id===updatedSquare.id && turn===false && updatedSquare.value ===''){
+              updatedSquare.value = PLAYER_2;
+              changeRow.push(updatedSquare);
+            }
+            else {
+              changeRow.push(square);
+            };
+          })
+          nextSquare.push(changeRow);
+        })
+  
+        setSquares(nextSquare);
+        // checkForWinner(nextSquare);
+        setTurn(!turn);
+      
+      }
+  }
 
 
   const checkForWinner = () => {
     // Complete in Wave 3
     // You will need to:
-    // 1. Go accross each row to see if 
+    // 1. Go across each row to see if 
     //    3 squares in the same row match
     //    i.e. same value
     // 2. Go down each column to see if
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
-
   }
 
   const resetGame = () => {
@@ -62,11 +90,11 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>{winner} </h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquare} />
       </main>
     </div>
   );
