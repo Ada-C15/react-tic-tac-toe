@@ -28,10 +28,14 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1)
-//if player1, set to player2
+  const[winner, setWinner] = useState('');
+  const[gameState, setState] = useState(true)
+
   const updateSquare = (id, value) => {
     return () => {
-      if (value === '') {
+      checkForWinner()
+
+      if (value === '' && gameState === true) {
         const newSquares = squares.map(row => {
           return row.map(square => {
             if (square.id === id) {
@@ -42,30 +46,72 @@ const App = () => {
           })
         })
 
-        console.log('newSquares', newSquares)
-
         setSquares(newSquares)
         
-        if (currentPlayer === PLAYER_1) {
-          setCurrentPlayer(PLAYER_2)
-        } else {
-          setCurrentPlayer(PLAYER_1)
-        }
+          if (currentPlayer === PLAYER_1) {
+            setCurrentPlayer(PLAYER_2)
+          } else {
+            setCurrentPlayer(PLAYER_1)
+          }
+        
       }
     }
   };
 
   const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
+    let winner = '';
 
+    //horizontal wins
+    for(let row of squares) {
+      if (row[0].value === row[1].value && 
+        row[1].value === row[2].value &&
+        row[0].value && row[0].value !== '') {
+        winner = (row[0].value);
+      }
+    };
+
+    //diagonal wins
+    if (squares[0][0].value === squares[1][1].value && 
+      squares[0][0].value === squares[2][2].value &&
+      squares[0][0].value !== '') {
+        winner = (squares[0][0].value);
+      }
+
+      else if (squares[0][2].value === squares[1][1].value && 
+        squares[0][2].value === squares[2][0].value &&
+        squares[0][2].value !== '') {
+          winner = (squares[0][2].value);
+        };
+    
+      //vertical wins
+
+      if (squares[0][0].value === squares[1][0].value && 
+        squares[0][0].value === squares[2][0].value &&
+        squares[0][0].value !== '') {
+          winner = (squares[0][0].value);
+        }
+      
+        else if (squares[0][1].value === squares[1][1].value && 
+          squares[0][1].value === squares[2][1].value &&
+          squares[0][1].value !== '') {
+            winner = (squares[0][1].value);
+          }
+
+        else if (squares[0][2].value === squares[1][2].value && 
+          squares[0][2].value === squares[2][2].value &&
+          squares[0][2].value !== '') {
+            winner = (squares[0][2].value);
+          }
+
+    if (winner) {
+      setWinner(winner);
+      setState(false);
+    }
+
+  }
+
+  if (!winner) {
+    checkForWinner()
   }
 
   const resetGame = () => {
@@ -76,7 +122,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is {winner}</h2>
         <button>Reset Game</button>
       </header>
       <main>
