@@ -48,11 +48,11 @@ const App = () => {
         let square = squares[row][col]
         if (square.id === id) {
           if (xPlayer === true) {
-            square.value = 'X'
+            square.value = 'x'
             setNext(false)
           }
           else {
-            square.value = 'O'
+            square.value = 'o'
             setNext(true)
           }
         }
@@ -111,7 +111,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ...{winner} </h2>
+        <h2>Winner is {winner}</h2>
         <button>Reset Game</button>
       </header>
       <main>
