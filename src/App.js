@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'X'
+const PLAYER_2 = 'O'
 
 const generateSquares = () => {
   const squares = [];
@@ -30,13 +29,29 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
+  const [currentPlayer, setCurrentPlayer] = useState('X');
 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
-
+  const updateSquare = (squareToUpdate) => {
+    const newBoard = [...squares]
+    const row = Math.floor(squareToUpdate.id/3)
+    const colume = squareToUpdate.id%3
+    
+    squareToUpdate.value = currentPlayer
+    newBoard[row][colume] = squareToUpdate
+    
+    if (currentPlayer === 'X') {
+        setCurrentPlayer(PLAYER_2);
+    } else {
+      setCurrentPlayer(PLAYER_1)
+    };
+    setSquares(newBoard)
+  }
+  
   const checkForWinner = () => {
     // Complete in Wave 3
     // You will need to:
@@ -62,7 +77,11 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={generateSquares()} />
+        <Board 
+        squares={ squares }
+        onClickCallback={ updateSquare } 
+        currentPlayer={ currentPlayer }
+        />
       </main>
     </div>
   );
