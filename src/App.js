@@ -32,8 +32,9 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
     const [squares, setSquares] = useState(generateSquares());
+    const [winner, setWinner] = useState(null);
     const updateGame = (id) => {
-      // console.log('here', id);
+      console.log('here', id);
       const updatedSquares = [];
       squares.flat().forEach((square) => {
         if (square.id === id && square.value === '') {
@@ -46,7 +47,14 @@ const App = () => {
         }
         updatedSquares.push(square);
       });
-      setSquares(updatedSquares);
+      const moreSquares = [];
+
+      moreSquares.push(updatedSquares.slice(0, 3));
+      moreSquares.push(updatedSquares.slice(3, 6));
+      moreSquares.push(updatedSquares.slice(6, 9));
+
+      setSquares(moreSquares);
+      setWinner(checkForWinner(squares));
     };
   // Wave 2
   // You will need to create a method to change the square 
@@ -54,7 +62,50 @@ const App = () => {
   //   Then pass it into the squares as a callback
 
 
-  const checkForWinner = () => {
+  const checkForWinner = (moreSquares) => {
+    console.log('checking');
+    let winner = null;
+    const leftTop = moreSquares[0][0].value;
+    const leftBottom = moreSquares[2][0].value;
+    const rightTop = moreSquares[0][2].value;
+    const rightBottom = moreSquares[2][2].value;
+    const center = moreSquares[1][1].value;
+
+  
+        if (leftTop === moreSquares[0][1].value && leftTop === rightTop && leftTop !== ''){
+          winner = leftTop; //top row
+
+      } else if (moreSquares[1][0].value === center && moreSquares[1][0].value === moreSquares[1][2].value && center !== '') {
+          winner = center; // middle row
+
+      } else if (leftBottom === moreSquares[2][1].value && leftBottom === rightBottom && leftBottom !== '') {
+          winner = leftBottom; // bottom row
+
+      } else if (leftTop === moreSquares[1][0].value && leftTop === leftBottom && leftBottom !== '') {
+          winner = leftTop; // left column
+
+      } else if (moreSquares[0][1].value === center && moreSquares[0][1].value === moreSquares[2][1].value && center !== '') {
+          winner = center; // center column
+
+      } else if (rightTop === moreSquares[1][2].value && rightTop === rightBottom && rightTop !== '') {
+          winner = rightTop; //right col
+          
+      } else if (leftTop === center && leftTop === rightBottom && rightBottom !== '') {
+          winner = center; //diag left
+
+      } else if (rightTop === center && rightTop === leftBottom && rightTop !== '') {
+          winner = center;  //diag right
+          
+      } if (winner === 'X') {
+          return PLAYER_1;
+      } else if (winner === 'O') {
+          return PLAYER_2;
+      } else {
+          return null;
+      }
+      // return winner;
+
+
     // Complete in Wave 3
     // You will need to:
     // 1. Go accross each row to see if 
@@ -64,7 +115,6 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
-
   }
 
   const resetGame = () => {
@@ -75,7 +125,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is ...  {winner} </h2>
         <button>Reset Game</button>
       </header>
       <main>
