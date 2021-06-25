@@ -85,6 +85,34 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
+    let i = 0;
+
+    // Check all the rows and columns for a winner
+    while (i < 3) {
+      if (squares[i][0].value === squares[i][1].value &&
+        squares[i][2].value === squares[i][1].value &&
+        squares[i][0].value !== '') {
+        return squares[i][0].value;
+      } else if (squares[0][i].value === squares[1][i].value &&
+        squares[2][i].value === squares[1][i].value &&
+        squares[0][i].value !== '') {
+        return squares[0][i].value;
+      }
+      i += 1;
+    }
+    if (squares[0][0].value === squares[1][1].value &&
+      squares[2][2].value === squares[1][1].value &&
+      squares[1][1].value !== '') {
+      return squares[0][0].value;
+    }
+
+    if (squares[0][2].value === squares[1][1].value &&
+      squares[2][0].value === squares[1][1].value &&
+      squares[1][1].value !== '') {
+      return squares[0][2].value;
+    }
+
+    return null;
 
   }
 
