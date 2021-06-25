@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = ({squares, onClickCallback}) => {
 
-  let squaresOneDimension = [];
+  let squaresDimension = [];
     for (let idx=0; idx<squares.length; idx++){
-      squaresOneDimension = squaresOneDimension.concat(squares[idx]);
+      squaresDimension = squaresDimension.concat(squares[idx]);
     }
 
-    let squareComponents = squaresOneDimension.map((square) => {
+  let squareComponents = squaresDimension.map((square) => {
       return (
         <Square key={square.id}
         id={square.id}
