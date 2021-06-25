@@ -1,4 +1,5 @@
 // followed tutorial at: https://reactjs.org/tutorial/tutorial.html
+//  can talk through code to show understanding
 function Square(props) { 
     return (
     <button className="square" onClick={props.onClick}>
