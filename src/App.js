@@ -6,6 +6,17 @@ import Board from './components/Board';
 const PLAYER_1 = 'x';
 const PLAYER_2 = 'o';
 
+const BOARD = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 const generateSquares = () => {
   const squares = [];
 
@@ -79,7 +90,25 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
+    for(let i in BOARD) {
+      const [a, b, c] = BOARD[i]
 
+      const squareValues = getValues();
+      if (squareValues[a] && squareValues[a] === squareValues[b] && squareValues[b] === squareValues[c]) {
+        return squareValues[a]; 
+      };
+    };
+    return null;
+  }
+  // helper function for wave 3
+  const getValues = () => {
+    const squareValues = [];
+
+    squares.forEach(square => {
+      squareValues.push(square[0].value, square[1].value, square[2].value);
+    });
+
+    return squareValues;
   }
 
   const resetGame = () => {
@@ -90,7 +119,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        {/* <h2>{winner === null ? `The winner is ${winner}` : `Current Player ${currentPlayer}`} </h2> */}
+        <h2>{winner === null ? `Current Player ${ currentPlayer }` : `Winner is ${ winner }`}</h2>
         <button>Reset Game</button>
       </header>
       <main>
