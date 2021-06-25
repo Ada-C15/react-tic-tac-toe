@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -58,7 +58,53 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
+    //Check rows
+    //First row
+    if (squares[0][0] !== '' && squares[0][0].value === squares[0][1].value && squares[0][1].value === squares[0][2].value) {
+      return squares[0][0].value;
+    }
+    //Second row
+    if (squares[1][0] !== '' && squares[1][0].value === squares[1][1].value && squares[1][1].value === squares[1][2].value) {
+      return squares[1][0].value;
+    }
+    //Third row
+    if (squares[2][0] !== '' && squares[2][0].value === squares[2][1].value && squares[2][1].value === squares[2][2].value) {
+      return squares[2][0].value;
+    }
 
+    //Columns
+    //First column
+    if (squares[0][0] !== '' && squares[0][0].value === squares[1][0].value && squares[1][0].value === squares[2][0].value) {
+      return squares[0][0].value;
+    }
+    //Second column
+    if (squares[0][1] !== '' && squares[0][1].value === squares[1][1].value && squares[1][1].value === squares[2][1].value) {
+      return squares[0][1].value;
+    }
+    //Third column
+    if (squares[0][2] !== '' && squares[0][2].value === squares[1][2].value && squares[1][2].value === squares[2][2].value) {
+      return squares[0][2].value;
+    }
+
+    //Diagonals
+    //left to right
+    if (squares[0][0] !== '' && squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value) {
+      return squares[0][0].value;
+    }
+    //top right-bottom left
+    if (squares[0][2] !== '' && squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value) {
+      return squares[0][2].value;
+    }
+
+    //Tie iterate through the grid to find empty spaces
+    for (let row = 0; row < 3; row += 1) {
+      for (let column = 0; column < 3; column += 1) {
+        if (squares[row][column].value === '') {
+          return '';
+        }
+      }
+    }
+    return 'No one won it\'s a Tie';
   }
 
   const resetGame = () => {
@@ -69,7 +115,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>Winner is {checkForWinner()} </h2>
         <button>Reset Game</button>
       </header>
       <main>
