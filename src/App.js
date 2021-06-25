@@ -61,17 +61,35 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
-
+  const checkForWinner = (board) => {
+    const winningCombinations = [[1,2,3], [1,4,7], [7,8,9], [3,6,9], [3,5,7], [1,5,9], [4,5,6], [2,5,8]];
+    const xs = [];
+    const os = [];
+    let finished = true;
+    for (i=0; i < board.length; i++) {
+      for (j=0; j < board.length; j++) {
+        if (board[i][j].value === 'x') {
+          xs.append(board[i][j].id);
+        } else if (board[i][j].value === 'o') {
+          os.append(board[i][j].id);
+        } else if (board[i][j].value === '') {
+          finished = false;
+        }
+      }
+    }
+    for (win of winningCombinations) {
+      if (win.every((el) => {
+        return xs.indexOf(el) !== -1;
+      })) {
+        return PLAYER_1;
+      } else if (win.every((el) => {
+        return os.indexOf(el) !== -1.
+      })) {
+        return PLAYER_2;
+      }
+    }
+    if (finished) return 'tie';
+    return null;
   }
 
   const resetGame = () => {
