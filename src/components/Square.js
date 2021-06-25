@@ -9,19 +9,11 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
 
-  //*** NOT WORKING, probably need to use STATE!  ***/
-  const [value, setValue] = useState('');
-  
-  const fillSquare = () => {
-    setValue('M');
-  };
-
   return (
     <button 
       className="square"
-      onClick={fillSquare}>
+      onClick = {() => props.onClickCallback(props.id)}>
       {props.value}
-      {value}
     </button>
   );
 };
