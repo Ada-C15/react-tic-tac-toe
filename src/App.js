@@ -28,6 +28,7 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_2);
+  // const [squaresFilled, setSquaresFilled] = useStates(0);
   const [winner, setWinner] = useState('Winner is...');
   // 'Winner is x'
   // Wave 2
@@ -48,14 +49,14 @@ const App = () => {
               setCurrentPlayer(PLAYER_1)
             }
           }
-
+          
         }
         setSquares(squares => [...squares])
-        checkForWinner()
         return square
       })
     })
-   
+    
+    checkForWinner()
 
   }
 
@@ -81,7 +82,7 @@ const App = () => {
 
   const checkRows = () => {
     for (let i = 0; i < 3; i++){
-      if (squares[i][0].value === squares[i][1].value && squares[i][1].value === squares[i][2].value) {
+      if (squares[i][0].value === squares[i][1].value && squares[i][1].value === squares[i][2].value && squares[i][0].value !== '') {
         setWinner(`Winner is ${squares[i][0].value}`)
         return true
       }
@@ -114,6 +115,9 @@ const App = () => {
 
 
   const resetGame = () => {
+    // setSquares(generateSquares());
+    // setCurrentPlayer(PLAYER_1);
+    
     // Complete in Wave 4
   }
 
