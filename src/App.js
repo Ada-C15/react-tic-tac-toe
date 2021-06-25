@@ -27,6 +27,7 @@ const generateSquares = () => {
 const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState('x');
+  const [winner, setWinner] = useState(null)
   let newBoard = [...squares]
 
   const updateSquare = (squareToUpdate) => {
@@ -43,6 +44,7 @@ const App = () => {
       };
       setSquares(newBoard)
     }
+    setWinner(checkForWinner())
   }
   
   const checkForWinner = () => {
@@ -52,24 +54,24 @@ const App = () => {
       if (newBoard[i][0].value === newBoard[i][1].value &&
         newBoard[i][2].value === newBoard[i][1].value &&
         newBoard[i][0].value !== '') {
-        return newBoard[i][0].value;
+          return newBoard[i][0].value;
       } else if (newBoard[0][i].value === newBoard[1][i].value &&
         newBoard[2][i].value === newBoard[1][i].value &&
-        newBoard[0][i].value !== '') {
-        return newBoard[0][i].value;
+        newBoard[0][i].value !== '') { 
+          return newBoard[0][i].value;
       }
       i += 1;
     }
     if (newBoard[0][0].value === newBoard[1][1].value &&
       newBoard[2][2].value === newBoard[1][1].value &&
       newBoard[1][1].value !== '') {
-      return newBoard[0][0].value;
+        return newBoard[0][0].value;
     }
 
     if (newBoard[0][2].value === newBoard[1][1].value &&
       newBoard[2][0].value === newBoard[1][1].value &&
       newBoard[1][1].value !== '') {
-      return newBoard[0][2].value;
+        return newBoard[0][2].value;
     }
 
     return null;
@@ -78,13 +80,14 @@ const App = () => {
   const resetGame = () => {
     setSquares(generateSquares())
     setCurrentPlayer('x')
+    setWinner(null)
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>Winner is {checkForWinner()} </h2>
+        <h2>{winner === null ? `Current Player is ${currentPlayer}` : `Winner is ${winner}`}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
