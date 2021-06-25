@@ -41,7 +41,7 @@ const App = () => {
         console.log({ square })
         // if squaure is not equal to updated squareID or Value,hold that value inside that box and do not let it change.
         if (square.id === updatedSquare.id && !updatedSquare.value) {
-          square.value = currentPlayer 
+          square.value = currentPlayer
           // makes current players alternate
           setCurrentPlayer(currentPlayer === PLAYER_1 ? PLAYER_2 : PLAYER_1)
           return square;
@@ -50,7 +50,7 @@ const App = () => {
     });
 
 
-    
+
     if (currentPlayer === PLAYER_1) {
       setCurrentPlayer(PLAYER_2)
     } else if (currentPlayer === PLAYER_2) {
@@ -82,7 +82,7 @@ const App = () => {
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
 
-    
+
     let i = 0;
 
     // Check Row and Columns
@@ -94,7 +94,7 @@ const App = () => {
         setWinner(squares[0][i].value);
       }
       i += 1;
-      
+
     }
     // Check diagonally 
     if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value && squares[0][0].value !== '') {
@@ -104,7 +104,7 @@ const App = () => {
       setWinner(squares[0][2].value);
     }
 
-    return 
+    return
 
   }
 
@@ -117,7 +117,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        {<h2>The winner is player {winner}</h2>}
+        {<h2>Winner is {winner}</h2>}
         <button>Reset Game</button>
       </header>
       <main>

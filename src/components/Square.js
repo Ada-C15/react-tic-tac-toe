@@ -11,7 +11,7 @@ const Square = ({ value, id, onClickCallback }) => {
   //  component when it's clicked on.
 
   // create an Anonymous function on onClick={onClickCallback}
-  return <button className="square" onClick={() => onClickCallback(id)}> {value}</button>
+  return <button className="square" onClick={() => onClickCallback(id)}>{value}</button>
 
 }
 
