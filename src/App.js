@@ -89,7 +89,9 @@ const checkForWinner = () => {
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares())
+    foundWinner('')
+    playedRounds(0)
   }
 
   return (
