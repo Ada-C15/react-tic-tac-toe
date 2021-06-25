@@ -146,9 +146,9 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Tic Tac Toe Game</h1>
+        <h1>😍 Tic Tac Toe 😍</h1>
         <h2>{checkForWinner()}</h2>
-        <div className="reset-button"><button>Reset Game</button> </div>
+        <div className="reset-button"><button className="button">Reset Game</button> </div>
         
       </header>
       <main>

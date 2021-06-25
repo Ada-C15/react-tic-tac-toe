@@ -3,18 +3,7 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-const style = {
-	border: '4px solid darkblue',
-	borderRadius: '10px',
-	width: '250px',
-	height: '250px',
-	margin: '0 auto',
-	display: 'grid',
-	gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
-};
-
-
-const generateSquareComponents = (squares, onClickCallback) => {
+const generateSquareComponents = ({squares, onClickCallback}) => {
 
   let squaresOneDimension = [];
     for (let idx=0; idx<squares.length; idx++){
@@ -42,9 +31,9 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 
 const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
+  const squareList = generateSquareComponents({squares, onClickCallback});
   console.log(squareList);
-  return <div style={style} className="grid" >
+  return <div className="grid" >
     {squareList}
   </div>
 }
