@@ -5,26 +5,24 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-  // squares is a 2D Array, but 
-  //  you need to return a 1D array
-  //  of square components
+  // Wave 1
+  // squares is a 2D Array, but need to be 1D array of square components
+  // to be rendered by React
   const squareComponents = []
   squares.forEach((row) => {
     row.forEach((square) => {
+      // Passes props from Board to Square
       squareComponents.push(<Square 
         key={ square.id }  
         value = { square.value }
         id = { square.id } 
         onClickCallback = { onClickCallback }/>)
-      // console.log(squares)
     })
   });
-  console.log(squareComponents)
   return squareComponents
 
 }
-// functional component 
+
 // Generates the squares in the grid and that forms the board
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
@@ -44,6 +42,7 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
+
 };
 
 export default Board;

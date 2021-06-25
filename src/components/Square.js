@@ -2,20 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Square.css'
 
-const Square = (props) => {
-  // For Wave 1 enable this 
-  // DO YOU MEAN WAVE 2? - I did this on line 16 onClickCallback
-  //  Component to alert a parent 
-  //  component when it's clicked on.
-  console.log(props)  
+const Square = ({id, onClickCallback, value}) => {
+  // For Wave 1 enable  
+  //  Component to alert a parent component when it's clicked on. 
   
-  // Passing the onClickCallback function into the squares 
   return <button 
   className="square" 
-  // I could have done this too:
-  //  Calling 
-  onClick={() => props.onClickCallback(props.id)}>
-    {props.value}
+  // Passing the onClickCallback function into the squares 
+  // SetValue callBack Function
+  onClick={() => onClickCallback(id)}>
+  {value}
   </button>
 }
 
