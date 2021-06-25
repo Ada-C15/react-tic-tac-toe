@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
+import Square from './components/Square';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
@@ -31,10 +32,33 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
+  const [currentPlayerX, setCurrentPlayerX] = useState(true);
+  // const currentValue = currentPlayerX? 'X' : 'O';
+
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+
+  const updateGameState = (id) => {
+    const game = squares.map((row) => {
+      return row.map((square) => {
+        if(id == square.id) {
+          if(currentPlayerX) {
+            square.value = 'x'
+            setCurrentPlayerX(!currentPlayerX)
+          } else {
+            square.value = 'o'
+            setCurrentPlayerX(!currentPlayerX)
+          }
+        } 
+        return square;
+        });
+      });
+      setSquares(game);
+  };
+
+
 
 
   const checkForWinner = () => {
@@ -52,6 +76,12 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    // const [currentPlayerX, setCurrentPlayer] = useState(false)
+
+    // const addPlayer = () => {
+    //   setCurrentPlayer(!currentPlayer);
+    // }
+    // const currentValue = currentPlayerX? "X" : "O";
   }
 
   return (
@@ -62,7 +92,11 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares}/>
+        <Board 
+        squares={squares} 
+        onClickCallback ={updateGameState}
+        />
+      
       </main>
     </div>
   );
