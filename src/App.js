@@ -27,13 +27,8 @@ const generateSquares = () => {
 
 const App = () => {
 
-  //  State for keeping count of which square index has been clicked:
   const [squares, setSquares] = useState(generateSquares());
-  
-  //  State for keeping track of which player_1 (X) or player_2 (O) is clicking which squareL
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
-  
-  //  1 for the winner, to set either player_1 or player_2 equal to winner:
   const [winner, setWinner] = useState(null);
 
   const checkForWinner = () => {
@@ -79,12 +74,17 @@ const App = () => {
     } else {
       setCurrentPlayer(PLAYER_1);
     };
+    setSquares(squares);
     setWinner(checkForWinner());
+
   };
 
 
   const resetGame = () => {
     // Complete in Wave 4
+    setSquares(generateSquares());
+    setCurrentPlayer(PLAYER_1);
+    setWinner(null);
   }
 
   return (
@@ -93,7 +93,7 @@ const App = () => {
         <h1>React Tic Tac Toe</h1>
         <h2>Current player is {currentPlayer}</h2>
         <h2>The winner is ...{winner}</h2>
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquares} />
