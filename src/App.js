@@ -29,13 +29,24 @@ const App = () => {
 
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
-  const [squares, setSquares] = useState(generateSquares());
-
+  const [squares, setSquares] = useState(generateSquares()); //useState of Player1 that updates so with setPlayer
+  const [player, setPlayer] = useState(PLAYER_1);
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
-
+  //need to iterate through the board and see if the place they click will make an x or o. tied to ids
+  const markSpace = (spaceId) => {
+    for (let row = 0; row < 3; row += 1) {
+      for (let column = 0; column < 3; column += 1) {
+        if (squares[row][column].id === spaceId) {
+          squares[row][column].value = player;
+        }
+      }
+    }
+    setSquares(squares); //set up like the toggle button color in examples but start at player 1 then keep switching between the players
+    setPlayer(player === PLAYER_1 ? PLAYER_2 : PLAYER_1);
+  }
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -62,7 +73,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={markSpace}/>
       </main>
     </div>
   );

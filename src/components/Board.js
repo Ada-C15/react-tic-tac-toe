@@ -20,9 +20,9 @@ const generateSquareComponents = (squares, onClickCallback) => { //save click fo
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList); //Look at studetList example for below
+  console.log(squareList); //Look at studetList example for below. For Wave 2 add the onClick
   return <div className="grid" > 
-    {squareList.map(square=> <Square key={square.id} square={square}/>)} 
+    {squareList.map(square=> <Square key={square.id} id={square.id} value={square.value} onClickCallback={onClickCallback}/>)} 
   </div>
 }
 
