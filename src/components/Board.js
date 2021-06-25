@@ -4,29 +4,26 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
-const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-  // squares is a 2D Array, but 
-  //  you need to return a 1D array
-  //  of square components
-  const flattened = [];
-  for (let row = 0; row < 3; row += 1) {
-    for (let col = 0; col < 3; col +=1) {
-      flattened.push(squares[row][col]);
-    }
-  }
+const generateSquareComponents = (squares, onClickCallback, goesFirst) => {
+  const oneRow = squares.map ((row) => {
+    return row.map ((square) => {
+      return (
+        <Square id={square.id} value={square.value} onClickCallback={onClickCallback} goesFirst={goesFirst} />
+      );
+    });
+  });
 
-  return flattened;
-  
-  
-
+  return (oneRow);
 }
 
-const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
+
+
+
+const Board = ({ squares, onClickCallback, goesFirst}) => {
+  const flattened = generateSquareComponents(squares, onClickCallback, goesFirst);
+  // console.log(flattened);
   return <div className="grid" >
-    {squareList.map(square => <Square key={square.id} square={square} />)}
+    { flattened }
   </div>
 }
 
@@ -40,6 +37,8 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
+  goesFirst: PropTypes.string.isRequired,
+
 };
 
 export default Board;

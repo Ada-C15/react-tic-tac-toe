@@ -3,23 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
-
-// const turn = function(PLAYER_1, PLAYER_2) {
-//   let goesFirst;
-//   let goeSecond;
-//   if (goesFirst === PLAYER_1) {
-    
-//     }  goesSecond = PLAYER_2;
-
-//   if (goesFirst === PLAYER_2) {
-
-//   } goesSecond = PLAYER_1;
-  
-
-
-// };
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -40,58 +25,100 @@ const generateSquares = () => {
   return squares;
 }
 
-const App = () => {
+const App = () => {  
+  const [goesFirst, goesNext] = useState(PLAYER_1)
+  const [winner, setWinner] = useState('...')
 
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
-  // const [players, setPlayers] = useState;
+  
 
 
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  const turn = () => {
+    if (goesFirst === PLAYER_1) {
+      goesNext(PLAYER_2);
+    } else {
+      goesNext(PLAYER_1)
+    };
+  
+  };
 
 
-  // change state by creating new data structure and replacing structure
 
-  // 
 
-  const play = () => {
-    const board = []
-    
+  const play = (updatedSquare) => {
+    const board = [];
+    let i = 0;
+    squares.forEach((row) => {
+      board.push([]);
+      row.forEach((square) => {
+        if (square.id === updatedSquare.id && square.value === '' && winner === '...') {
+          
+          updatedSquare.value = goesFirst
+          console.log(square.value)
+          board[i].push(updatedSquare);
+          turn();
+        } else {
+          board[i].push(square);
+        }
+      });
+      i+= 1
+    });
+    setSquares(board);
+    checkForWinner(board);
   }
   
   
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
+  const checkForWinner = (board) => {
+    
 
+    for (let row = 0; row < 3; row++) {
+      const rows = board[row][0].value + board[row][1].value + board[row][2].value;
+      whoWon(rows);
+    }
+    
+
+    for (let column = 0; column < 3; column++) {
+      const columns = board[0][column].value + board[1][column].value + board[2][column].value;
+      whoWon(columns)
+    }
+    
+
+    const diagonalOne = board[0][0].value + board[1][1].value + board[2][2].value
+    whoWon(diagonalOne);
+
+
+    const diagonalTwo = board[0][2].value + board[1][1].value + board[2][0].value
+    whoWon(diagonalTwo);
+
+
+
+  }
+
+  const whoWon = (string) => {
+    if (string === 'xxx') {
+      setWinner(PLAYER_1)
+    } else if (string === 'ooo') {
+      setWinner(PLAYER_2)
+    }
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
+    goesNext(PLAYER_1);
+    setWinner('...');
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>Winner is {winner}</h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={play} goesFirst={goesFirst} />
       </main>
     </div>
   );
