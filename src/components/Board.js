@@ -4,20 +4,24 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
-const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-  // squares is a 2D Array, but 
-  //  you need to return a 1D array
-  //  of square components
-
+const generateSquareComponents = (squares, onClickCallback, currentPlayer) => {
+  const oneD = [];
+  for (let i=0; i < 3; i++) {
+    for (let j=0; j < 3; j++) {
+      oneD.push(<Square key={ squares[i][j].id } value={ squares[i][j].value } id={ squares[i][j].id } onClickCallback={ onClickCallback } currentPlayer={ currentPlayer} />);
+    }
+  }
+  return oneD;
 }
 
-const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
+const Board = (props) => {
+  const squareList = generateSquareComponents(props.squares, props.onClickCallback, props.currentPlayer);
   console.log(squareList);
-  return <div className="grid" >
-    {squareList}
-  </div>
+  return (
+    <div className="grid" >
+      {squareList}
+    </div>
+  );
 }
 
 Board.propTypes = {
@@ -30,6 +34,7 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
+  currentPlayer: PropTypes.string.isRequired
 };
 
 export default Board;
