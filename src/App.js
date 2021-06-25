@@ -32,7 +32,7 @@ const App = () => {
   // Initial state for board, turn and winner  
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(0);
-  const [winner, setWinner] = useState('');
+  const [winner, setWinner] = useState(null);
 
   // Wave 2
   // Method to change the square when it is 
@@ -40,6 +40,9 @@ const App = () => {
   const setValue = (id) => {
     // To determine position of the board where user is clicking with
     // square id, given it's a 2D array:
+    if (winner !== null){
+      return;
+    }
     const row = Math.floor(id / 3);
     const col = id % 3
     if (squares[row][col].value === '') {
@@ -102,7 +105,7 @@ const App = () => {
   const resetGame = () => {
     // Wave 4
     setSquares(generateSquares())
-    setWinner('')
+    setWinner(null)
     setTurn(0)
   }
 
