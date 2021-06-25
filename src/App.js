@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -22,7 +21,6 @@ const generateSquares = () => {
     }
   }
 
-  console.log(squares)
   return squares;
 }
 
@@ -31,14 +29,50 @@ const App = () => {
   // ✅ Wave 1: Represents the state of the game board in a 2D array of objects 
   // ✅ Wave 1: Use the helper function `generateSquares`  to create the initial value of board state
 
-  // Remember this referece syntax:
+  // Recall this syntax for reference:
   // const [pieceOfState, setPieceOfState] = useState('Initial value for pieceOfState.');
   const [squares, setSquares] = useState(generateSquares());
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  // ✅ Wave 2:
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const [numSquaresFilled, setNumSquaresFilled] = useState(0);
+
+  const [winner, setWinner] = useState(null);
+
+
+  // ✅ Wave 2: create a method that updates the game state appropriately (Try utilizing the Square's ID value, which is unique to each square)
+  const updateSquares = (id) => {
+    if (winner !== null) return;
+
+    const newSquares = [...squares];
+    let row = 0;
+    let col = 0;
+    let found = false;
+
+    while (row < 3 && !found) {
+      while (col < 3 && !found) {
+        let currentSquare = newSquares[row][col];
+        if (currentSquare.id === id) {
+          // console.log(currentSquare);
+          if (currentSquare.value !== '') return;
+
+          found = true;
+          currentSquare.value = currentPlayer;
+          setNumSquaresFilled(numSquaresFilled + 1);
+          if (currentPlayer === PLAYER_1) {
+            setCurrentPlayer(PLAYER_2)
+          } else {
+            setCurrentPlayer(PLAYER_1);
+          }
+        }
+        col += 1;
+      }
+      row += 1;
+      col = 0;
+    }
+    setWinner(checkForWinner());
+    setSquares(newSquares);
+  }
 
 
   const checkForWinner = () => {
@@ -59,6 +93,7 @@ const App = () => {
   }
 
     // ✅ Wave 1: Renders a `Board` component
+    // ✅ Wave 2: The PropTypes of Board state that there is a required prop named `onClickCallback` - The value of this prop must be a function
   return (
     <div className="App">
       <header className="App-header">
@@ -67,7 +102,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquares} />
       </main>
     </div>
   );

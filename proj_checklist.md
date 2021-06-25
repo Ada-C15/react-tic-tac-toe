@@ -36,4 +36,33 @@ So the goal is to convert the above 2D array into [0,1,2,3,4,5,6,7,8]
 
 ---
 
+
+
+
+
 # Wave 2
+
+- [X] When a user clicks on a square, it should set the square's value to "X" or "O", depending on the current player's turn. This should update the game's state.
+
+
+## `App` component
+
+- [X] create a method that updates the game state appropriately (Try utilizing the Square's ID value, which is unique to each sequre)
+
+
+## `Board` component
+
+- [X] The PropTypes of Board state that there is a required prop named `onClickCallback` - The value of this prop must be a function
+
+
+## `Square`
+
+- [X] The PropTypes of Square state that there is a required prop named `onClickCallback` - The value of this prop must be a function
+
+---
+
+
+
+
+
+# Wave 3

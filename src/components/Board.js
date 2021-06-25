@@ -26,10 +26,9 @@ const generateSquareComponents = (squares, onClickCallback) => {
 }
 
 // ✅ Wave 1: `Board` component should pass the appropriate information from the game state to each `Square`.
+// ✅ Wave 2: The PropTypes of `Board` state that there is a required prop named `onClickCallback`
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-
-  // console.log(squareList);
 
   return (
     <div className="grid" >
