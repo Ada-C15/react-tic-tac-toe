@@ -8,10 +8,10 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.]
 
+  console.log(props)
 
 
   return <button className="square" onClick={() => props.onClickCallback(props.id)}>{props.value}</button>
-  {/* {props.value} */}
 };
 
 Square.propTypes = {
