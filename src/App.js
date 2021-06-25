@@ -6,7 +6,7 @@ import Board from './components/Board';
 const PLAYER_1 = 'x';
 const PLAYER_2 = 'o';
 let gameCount = 0;
-let winner = ''
+let winner = 'The winner is ...'
 
 const generateSquares = () => {
   //can this be created as flat after wave 5?
@@ -49,7 +49,7 @@ const checkForWinner = (squares) => {
 
     const [a, b, c] = patterns[i]; //destructuring assignment to get indexes
     if (squares[a].value && (squares[a].value === squares[b].value) && (squares[a].value === squares[c].value)) {
-      return squares[a].value;
+      return `Winner is ${squares[a].value}`;
       }
     }
     if (gameCount < 9){
@@ -95,7 +95,7 @@ const App = () => {
   const resetGame = () => {
     setSquares(generateSquares());
     gameCount = 0;
-    winner = '';
+    winner = 'The winner is ...';
     setMove(PLAYER_1);
   }
   
@@ -104,7 +104,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>Now Playing: {player}</h2>
-        <h2>The winner is ...{winner}-- Fill in for wave 3 </h2>
+        <h2>{winner}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
