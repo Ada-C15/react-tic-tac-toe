@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Board from './components/Board';
-import Square from './components/Square';
-import squareComponents from './components/Board';
+// import Square from './components/Square';
 
 
 const PLAYER_1 = 'X';
@@ -34,16 +33,31 @@ const App = () => {
                                                       // ^ create an initial state for who's turn 
 
   // Wave 2
-  // todays lessons are about the child component to tell app -- "i got clicked on" // -- we do that by passing a callback function as a prop
-  // Create a method to change the square // When it is clicked on. // Then pass it into the squares as a callback
   
-  const onClickCallback = () => {
-    console.log('Current player: ', currentPlayer)
-    // const allSquares = squares.map(square => {
-    //   if (square.id == )
-    // })
+  const onClickCallback = (event) => {
+    const existingButtonValue = event.target.value
+    console.log('event.target.id: ', event.target.id)
+    console.log('event.target.value: ', event.target.value)
+    if (existingButtonValue === '') {
+      const currentButtonId = event.target.id
+      const row = Math.floor(currentButtonId / 3)
+      const column = currentButtonId % 3
+    
+      const newSquares = generateSquares()
+      for (let r = 0; r < 3; r += 1) {
+        for (let c = 0; c < 3; c += 1) {
+          if (r === row && c === column) {
+            newSquares[r][c].value = currentPlayer
+          } else {
+            newSquares[r][c].value = squares[r][c].value
+          }          
+        }
+      }
 
+      setSquares(newSquares)
 
+    // const setCurrentPlayer = PLAYER_1 ? PLAYER_2: PLAYER_1;
+    // OR //
     if (currentPlayer === PLAYER_1){
       setCurrentPlayer(PLAYER_2)
     } else {

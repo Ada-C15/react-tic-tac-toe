@@ -8,16 +8,9 @@ const Square = ({ id, value, onClickCallback }) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
 
-  const onSquareClick = () => {
-    const updatedSquare = {
-      id: id,
-      value: value,
-      onClickCallback: onClickCallback
-    }
-  }
 
-  return <button className="square" onClick={onSquareClick}>
-     {value}                                {/*^^ how to pass the value? to update state/ re-render it */}
+  return <button className="square" id={id} onClick={onClickCallback}>
+     {value}                                                 {/*^^ how to pass the value? to update state/ re-render it */}
   </button>
 }
 
