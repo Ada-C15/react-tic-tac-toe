@@ -50,6 +50,7 @@ const SAMPLE_BOARD = [
 ];
 
 describe('Wave 1: Board', () => {
+
   test('that board will render with the proper number of Xs and Os', () => {
     // Act
     render(<Board squares={SAMPLE_BOARD} onClickCallback={() => {}} />);
