@@ -53,6 +53,10 @@ const App = () => {
 
   const updateSquare = (squareID) => {
 
+    if (winner) {
+      return;
+    }
+
     const updatedSquares = [...squares]
 
     for(let i=0; i < updatedSquares.length; i++) {
