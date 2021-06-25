@@ -21,7 +21,6 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
   return squares;
 }
 
@@ -33,16 +32,18 @@ const App = () => {
   const [currPlayer, setCurrentPlayer] = useState(PLAYER_1);
 
   const updateSquareData = (updatedSquare) => {
-  
-    const flatarr = squares.flat();
-    const newSquares = flatarr.map(square =>{
-      if (square.id === updatedSquare.id) {
-        square.value = currPlayer;
-      }  
-      return square;
-     
+
+    // const flatarr = squares.flat();
+    const newSquares = squares.map(row =>{
+      for (let j =0; j<row.length; j++){
+        const square = row[j]
+        if (square.id === updatedSquare.id) {
+          square.value = currPlayer;
+        }  
+      }
+      return row;    
     });
-      setSquares(newSquares);
+    setSquares(newSquares);
     if (currPlayer === PLAYER_1) {
       setCurrentPlayer(PLAYER_2)
     } else {
