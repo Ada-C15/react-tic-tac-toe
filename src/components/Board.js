@@ -5,8 +5,12 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // use spread
-  const singleArray = [].concat(...squares);
+  let singleArray=[]
+
+  for (let i = 0; i < squares.length; i++) {
+    singleArray = singleArray.concat(squares[i]);
+  }
+  // const singleArray = [].concat(...squares);
 
   return singleArray.map((square) => {
     return <Square
@@ -21,7 +25,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
   return <div className="grid" >
     {squareList}
   </div>
