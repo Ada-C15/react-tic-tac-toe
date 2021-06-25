@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
-import Square from './components/Square';
+
 
 const PLAYER_1 = 'x';
 const PLAYER_2 = 'o';
@@ -31,30 +30,38 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
-
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const [winner, setWinner] = useState('');
 
   const updateSquareData = (updatedSquare) => {
-    console.log(updatedSquare, 'click')
+    if (winner !== '') return;
+
     const allSquare = squares.map(row => {
       return row.map(square => {
         console.log({ square })
-        if (square.id === updatedSquare.id) {
-          console.log({ updatedSquare })
-          updatedSquare.value = currentPlayer
-          return updatedSquare;
-        } else {
+        // if squaure is not equal to updated squareID or Value,hold that value inside that box and do not let it change.
+        if (square.id === updatedSquare.id && !updatedSquare.value) {
+          square.value = currentPlayer 
+          // makes current players alternate
+          setCurrentPlayer(currentPlayer === PLAYER_1 ? PLAYER_2 : PLAYER_1)
           return square;
         }
       });
     });
-    setSquares(allSquare);
 
+
+     // setWinner(checkForWinner());
+    // put this inside while loop
     if (currentPlayer === PLAYER_1) {
       setCurrentPlayer(PLAYER_2)
     } else if (currentPlayer === PLAYER_2) {
       setCurrentPlayer(PLAYER_1);
     }
+
+
+    setSquares(squares);
+    checkForWinner()
+
   };
 
 
@@ -76,17 +83,42 @@ const App = () => {
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
 
+    
+    let i = 0;
+
+    // Check Row and Columns
+    while (i < 3) {
+      if (squares[i][0].value === squares[i][1].value && squares[i][2].value === squares[i][1].value && squares[i][0].value !== '') {
+        setWinner(squares[i][0].value);
+
+      } else if (squares[0][i].value === squares[1][i].value && squares[2][i].value === squares[1][i].value && squares[0][i].value !== '') {
+        setWinner(squares[0][i].value);
+      }
+      i += 1;
+      
+    }
+    // Check diagonally 
+    if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value && squares[0][0].value !== '') {
+      setWinner(squares[0][0].value);
+    }
+    if (squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value && squares[0][2].value !== '') {
+      setWinner(squares[0][2].value);
+    }
+
+    return 
+
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
   }
+
+  // reset button not working
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        {<h2>The winner is player {winner}</h2>}
         <button>Reset Game</button>
       </header>
       <main>
@@ -95,5 +127,4 @@ const App = () => {
     </div>
   );
 }
-
 export default App;
