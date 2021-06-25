@@ -7,20 +7,20 @@ import { render, screen, fireEvent, waitFor, prettyDOM} from '@testing-library/r
 describe('App', () => {
   // Helper function to click on buttons in the grid
   const clickButtonAndVerifyResult = (container, buttonIndex, expectedResult) => {
-    let buttons = container.querySelectorAll('.grid button');
+    let buttons = container.querySelectorAll('.square');
     fireEvent.click(buttons[buttonIndex]);
     
-    buttons = container.querySelectorAll('.grid button');
+    buttons = container.querySelectorAll('.square');
     expect(buttons[buttonIndex].innerHTML).toEqual(expectedResult);
   }
 
-  describe.skip('Wave 2: clicking on squares and rendering App', () => {
+  describe('Wave 2: clicking on squares and rendering App', () => {
 
   test('App renders with a board of 9 empty buttons', () => {
     // Arrange-Act - Render the app
     const { container } = render(<App />);
 
-    const buttons = container.querySelectorAll('.grid button');
+    const buttons = container.querySelectorAll('.square');
 
     // Assert (9 buttons in the grid)
     expect(buttons.length).toEqual(9);
@@ -61,14 +61,14 @@ describe('App', () => {
     const { container } = render(<App />);
 
     // Act
-    let buttons = container.querySelectorAll('.grid button');
+    let buttons = container.querySelectorAll('.square');
     fireEvent.click(buttons[0]);
 
     // after the click there should be a square with an "x"
     let clickedButton = screen.getByText('x');
     expect(clickedButton).toBeInTheDocument();
 
-    buttons = container.querySelectorAll('.grid button');
+    buttons = container.querySelectorAll('.square');
     fireEvent.click(buttons[0]);
 
     // Assert
@@ -85,7 +85,7 @@ describe('App', () => {
 });
 
   
-  describe.skip('Wave 3:  Winner tests', () => {
+  describe('Wave 3:  Winner tests', () => {
     describe('Prints "Winner is x" when x wins', () => {
       test('that a winner will be identified when 3 Xs get in a row across the top', () => {
         // Arrange

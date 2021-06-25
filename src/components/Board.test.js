@@ -78,17 +78,17 @@ describe('Wave 1: Board', () => {
     const { container } = render(<Board squares={emptyBoard} onClickCallback={() => { }} />);
 
     // Assert
-    const buttons = container.querySelectorAll('.grid button');
+    const buttons = container.querySelectorAll('.square');
     expect(buttons.length).toEqual(9);
   });
 });
 describe('Wave 2: Board', () => {
   describe('button click callbacks', () => {
-    test.skip('that the callback is called for the 1st button', () => {
+    test('that the callback is called for the 1st button', () => {
       // Arrange
       const callback = jest.fn();
       const { container } = render(<Board squares={SAMPLE_BOARD} onClickCallback={callback} />);
-      const buttons = container.querySelectorAll('.grid button');
+      const buttons = container.querySelectorAll('.square');
 
       // Act
       fireEvent.click(buttons[0]);
@@ -97,11 +97,11 @@ describe('Wave 2: Board', () => {
       expect(callback).toHaveBeenCalled();
     });
 
-    test.skip('that the callback is called for the last button', () => {
+    test('that the callback is called for the last button', () => {
       // Arrange
       const callback = jest.fn();
       const { container } = render(<Board squares={SAMPLE_BOARD} onClickCallback={callback} />);
-      const buttons = container.querySelectorAll('.grid button');
+      const buttons = container.querySelectorAll('.square');
 
       // Act
       fireEvent.click(buttons[buttons.length - 1]);
