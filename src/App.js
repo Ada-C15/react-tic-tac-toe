@@ -39,22 +39,29 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
-
+  
   const updateGameState = (id) => {
+  
+
     const game = squares.map((row) => {
       return row.map((square) => {
-        if(id == square.id) {
-          if(currentPlayerX) {
+      if(id == square.id) {
+        if(square.value === '') {
+          if(currentPlayerX){
             square.value = 'x'
             setCurrentPlayerX(!currentPlayerX)
-          } else {
+          } else{
             square.value = 'o'
             setCurrentPlayerX(!currentPlayerX)
           }
+        } else {
+            square.value = square.value
+        }
         } 
         return square;
         });
       });
+      // buttonIdClicked.push(id);
       setSquares(game);
   };
 
