@@ -27,27 +27,38 @@ const generateSquares = () => {
 
 const App = () => {
 
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
   const [currentPlayer, switchPlayer] = useState(PLAYER_1);
 
-  // Wave 2
+  const [winningPlayer, declareWinner] = useState(null);
+
   const updateBoard = (updatedSquare) => {
     const newBoard = squares;
+    let isSameBoard = true;
     for (let i=0; i < newBoard.length; i++) {
       let row = newBoard[i];
       for (let j=0; j < row.length; j++) {
         if (newBoard[i][j].id === updatedSquare.id) {
-          if (newBoard[i][j].value !== updatedSquare.value) switchTurns();
+          if (newBoard[i][j].value !== updatedSquare.value) isSameBoard = false;
           newBoard[i][j] = updatedSquare;
           break;
         }
       }
     }
-  
+
     setSquares(newBoard);
+
+    let winner = checkForWinner(newBoard, currentPlayer);
+    console.log('current player is ', currentPlayer);
+    console.log('winner is ', winner);
+
+    if (winner) {
+      declareWinner(winner);
+    }
+
+    if (!isSameBoard) switchTurns();
+
   }
 
   const switchTurns = () => {
@@ -57,35 +68,28 @@ const App = () => {
       return switchPlayer(PLAYER_1);
     }
   }
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
 
-  const checkForWinner = (board) => {
-    const winningCombinations = [[1,2,3], [1,4,7], [7,8,9], [3,6,9], [3,5,7], [1,5,9], [4,5,6], [2,5,8]];
-    const xs = [];
-    const os = [];
+
+  const checkForWinner = (board, player) => {
+    const winningCombinations = [[0,1,2], [0,3,6], [6,7,8], [2,5,8], [2,4,6], [0,4,8], [3,4,5], [1,4,7]];
+    const moves = [];
     let finished = true;
-    for (i=0; i < board.length; i++) {
-      for (j=0; j < board.length; j++) {
-        if (board[i][j].value === 'x') {
-          xs.append(board[i][j].id);
-        } else if (board[i][j].value === 'o') {
-          os.append(board[i][j].id);
+    for (let i=0; i < board.length; i++) {
+      for (let j=0; j < board.length; j++) {
+        if (board[i][j].value === player) {
+          moves.push(board[i][j].id);
         } else if (board[i][j].value === '') {
           finished = false;
         }
       }
     }
-    for (win of winningCombinations) {
-      if (win.every((el) => {
-        return xs.indexOf(el) !== -1;
-      })) {
-        return PLAYER_1;
-      } else if (win.every((el) => {
-        return os.indexOf(el) !== -1.
-      })) {
-        return PLAYER_2;
+    console.log('moves ', moves);
+    for (let win of winningCombinations) {
+      const isWinner = win.every((el) => {
+        return moves.indexOf(el) !== -1;
+      });
+      if (isWinner) {
+        return player;
       }
     }
     if (finished) return 'tie';
@@ -96,11 +100,13 @@ const App = () => {
     // Complete in Wave 4
   }
 
+  console.log('winningPlayer is set to ', winningPlayer);
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>Winner is { winningPlayer } </h2>
         <button>Reset Game</button>
       </header>
       <main>
@@ -108,6 +114,6 @@ const App = () => {
       </main>
     </div>
   );
-}
+};
 
 export default App;
