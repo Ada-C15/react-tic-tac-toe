@@ -13,7 +13,6 @@ It is more important to implement all the required features than it is to get th
 ## Introduction
 
 [Snapshot tests](https://jestjs.io/docs/snapshot-testing) are a kind of test that focus on validating the correctness of _UI_.
-
 Snapshot Tests | Unit Tests
 --- | ---
 Validate the correctness of how UI renders | Validate the correctness of a small unit, such as a function
