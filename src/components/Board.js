@@ -47,7 +47,8 @@ Board.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        value: PropTypes.string.isRequired
+        value: PropTypes.string.isRequired,
+        onClickCallback: PropTypes.func.isRequired,
       })
     )
   ),

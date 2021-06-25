@@ -37,7 +37,19 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const changePlayer = () => {
+    if (currentPlayer === PLAYER_1) {
+      setCurrentPlayer(PLAYER_2);
+      } else {
+      setCurrentPlayer(PLAYER_1);
+      }
+  };
 
+  const updateGameState = () => {
+    if {
+      setCurrentPlayer() === PLAYER_1 
+  }
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -66,7 +78,7 @@ const App = () => {
       <main>
         <Board 
         squares={squares} 
-        onClickCallback= { somefunction }/>
+        onClickCallback= {somefunction}/>
       </main>
     </div>
   );
