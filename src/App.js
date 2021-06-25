@@ -25,7 +25,6 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [isX, setIsX] = useState(true);
 
-  //need to figure out way to stop one letter from over-writing the other
   const markSquare = (id) => {
     console.log(id)
     for(let i=0; i<squares.length; i++) {
