@@ -33,16 +33,16 @@ const App = () => {
     const row = Math.floor(squareToUpdate.id/3)
     const colume = squareToUpdate.id%3
 
-    squareToUpdate.value = currentPlayer
-    newBoard[row][colume] = squareToUpdate
-    if (currentPlayer.value !== '') {
+    if (squareToUpdate.value === '') {
+      squareToUpdate.value = currentPlayer
+      newBoard[row][colume] = squareToUpdate
       if (currentPlayer === 'x') {
         setCurrentPlayer(PLAYER_2);
-    } else {
+      } else {
       setCurrentPlayer(PLAYER_1)
-    };
+      };
+      setSquares(newBoard)
     }
-    setSquares(newBoard)
   }
   
   const checkForWinner = () => {
@@ -91,7 +91,6 @@ const App = () => {
         <Board 
         squares={ squares }
         onClickCallback={ updateSquare } 
-        /*currentPlayer={ currentPlayer }*/
         />
       </main>
     </div>
