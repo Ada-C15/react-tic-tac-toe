@@ -38,7 +38,6 @@ const App = () => {
   //   Then pass it into the squares as a callback
 
   const updateSquare = (id) => {
-    // make a new array of squares to map out each individual square
     const newSquares = squares.map((row) => {
       return row.map((square) => {
         // if square matches the id that got passed in and not empty
@@ -119,7 +118,7 @@ const App = () => {
       return squares[0][2].value;
     }
 
-    // If conditions are false above and there is a space empty on the board, game still in progress 
+    // if there is a space empty on the board
 
     // for (let row = 0; row < 3; row += 1) {
     //   for (let col = 0; col < 3; col += 1) {

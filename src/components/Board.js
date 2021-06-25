@@ -12,11 +12,11 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
 
-  let flattenedBoard = []
+  let newBoard = []
   for(let i=0; i < squares.length; i++) {
-    flattenedBoard = flattenedBoard.concat(squares[i])
+    newBoard = newBoard.concat(squares[i])
   } 
-  return flattenedBoard.map((square) => {
+  return newBoard.map((square) => {
     return <Square 
       key={square.id} 
       id={square.id} 
@@ -25,12 +25,12 @@ const generateSquareComponents = (squares, onClickCallback) => {
       />
   })    
 
-  // const flattenedBoard = [];
+  // const newBoard = [];
   // for (let row = 0; row < 3; row += 1) {
   //   for (let col = 0; col < 3; col += 1) {
-  //     flattenedBoard.push(squares[row][col]);
+  //     newBoard.push(squares[row][col]);
   //   }
-  // } return flattenedBoard;
+  // } return newBoard;
 }
 
 const Board = ({ squares, onClickCallback }) => {
