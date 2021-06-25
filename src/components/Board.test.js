@@ -46,7 +46,7 @@ const SAMPLE_BOARD = [
       value: 'X',
       id: 8,
     },
-  ],    
+  ],
 ];
 
 describe('Wave 1: Board', () => {
@@ -54,7 +54,7 @@ describe('Wave 1: Board', () => {
   test('that board will render with the proper number of Xs and Os', () => {
     // Act
     render(<Board squares={SAMPLE_BOARD} onClickCallback={() => { }} />);
-      
+
     // Assert
     const xSquares = screen.getAllByText('X');
     expect(xSquares.length).toEqual(5);
