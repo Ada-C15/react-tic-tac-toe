@@ -41,60 +41,83 @@ const App = () => {
 
     /*updateSquares is working*/
   const updateSquares=(id)=>{
-    if (winner !== null) return;
+    if (winner === null){
   
-
     const newSquares = [...squares];
     let selectedSquare = newSquares.flat().find( newSquare =>newSquare.id ===id)
   
     if (selectedSquare.value !== '') return;
       selectedSquare.value = player;
       updateTurn();
+      updateStatus();
 
-    setWinner(checkForWinner());
     setSquares(newSquares);
   };
-    
-
-  const checkForWinner = () => {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+}
   
-      }
+  const checkForWinner = () => {
+    // vertical cases
+    for (let i = 0; i < 3; i++) {
+      if (squares[0][i].value === squares[1][i].value &&
+        squares[1][i].value === squares[2][i].value &&
+        squares[0][i].value !== '') {
+          return squares[0][i].value
+        }
     }
+
+    // horizontal cases
+    for (let i = 0; i < 3; i++) {
+      if (squares[i][0].value === squares[i][1].value &&
+        squares[i][1].value === squares[i][2].value &&
+        squares[i][0].value !== '') {
+          return squares[i][0].value
+        }
+    }
+
+    // diagonal cases
+    if (squares[0][0].value === squares[1][1].value &&
+      squares[1][1].value === squares[2][2].value &&
+      squares[0][0].value !== '') {
+        return squares[0][0].value
+      }
+    if (squares[0][2].value === squares[1][1].value &&
+      squares[1][1].value === squares[2][0].value &&
+      squares[0][2].value !== '') {
+        return squares[0][2].value
+      }
+
     return null;
-    
-  };
+  }
   
   /*update turn is working*/
-  const updateTurn = ()=>{
+  const updateTurn = ()=> {
     if (player === PLAYER_1) {
       setPlayer(PLAYER_2)
-      //setStatus('Next Turn: Player 2')
-      
-    } else {
+      setTurnCount(turnCount+1)
+    } else if (player === PLAYER_2) {
       setPlayer(PLAYER_1)
-      //setStatus('Next Turn: Player 1')
+      setTurnCount(turnCount + 1)
+      }
+    setWinner(checkForWinner());
+    };
+
+  const updateStatus= () => {
+    if (winner === null && turnCount === 9) {
+        setStatus('It\'s a tie!')
     }
-  };
+    else if (winner === null) {
+      setStatus(`Current Player ${player}`)
+      }
+    else if (winner === 'x' || winner === 'o') {
+      setStatus(`Winner is ${winner}`)
+      }
+    }
 
   /*reset Game is passing*/
   const resetGame = () => {
     setSquares(generateSquares());
     setPlayer(PLAYER_1);
-    setStatus('Lets Play!');
+    setStatus('Let\'s Play!');
     setWinner(null);
   }
 
@@ -102,7 +125,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>{status}</h2>
+        <h2>(updateStatus())</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
@@ -114,75 +137,3 @@ const App = () => {
 
 export default App;
 
-
-
-    // const newSquares = [...squares];
-    // let selectedSquare = newSquares.flat().find( newSquare =>newSquare.id ===id)
-  
-    // if (selectedSquare.value !== '') return;
-    //   selectedSquare.value = player;
-
-    // if (player === PLAYER_1) {
-    //   setPlayer(PLAYER_2);
-    // } else {
-    //   setPlayer(PLAYER_1);
-    //   }
-
-
-    // const updateSquares=(id)=>{
-    //   if (winner !== null) return;
-    //     setStatus(`winner is ${winner}`);
-  
-    //   const newSquares = [...squares];
-    //   let selectedSquare = newSquares.flat().find( newSquare =>newSquare.id ===id)
-    
-    //   if (selectedSquare.value !== '') return;
-    //     selectedSquare.value = player;
-        
-    // //const updateTurn = ()=>
-    //   if (player === PLAYER_1) {
-    //     setPlayer(PLAYER_2)
-    //     setStatus('Next Turn: Player 2')
-    //   } else {
-    //     setPlayer(PLAYER_1)
-    //     setStatus('Next Turn: Player 1')
-    //     }
-      
-    //   };
-
-
-    // const checkForWinner = () => {
-    //   const lines = [
-    //     [0, 1, 2],
-    //     [3, 4, 5],
-    //     [6, 7, 8],
-    //     [0, 3, 6],
-    //     [1, 4, 7],
-    //     [2, 5, 8],
-    //     [0, 4, 8],
-    //     [2, 4, 6],
-    //   ];
-    //   for (let i = 0; i < lines.length; i++) {
-    //     const [a, b, c] = lines[i];
-    //     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-    //       return squares[a];
-    //     }
-    //   }
-    //   return null;
-    // }
-
-  //   /*updateSquares is working*/
-  // const updateSquares=(id)=>{
-  //   if (winner !== null) return;
-  
-
-  //   const newSquares = [...squares];
-  //   let selectedSquare = newSquares.flat().find( newSquare =>newSquare.id ===id)
-  
-  //   if (selectedSquare.value !== '') return;
-  //     selectedSquare.value = player;
-  //     updateTurn();
-
-  //   setWinner(checkForWinner());
-  //   setSquares(newSquares);
-  // };
