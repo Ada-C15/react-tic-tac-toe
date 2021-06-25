@@ -3,7 +3,7 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'x';
+const PLAYER_1 = 'x';//change to lowercase or tests wont pass
 const PLAYER_2 = 'o';
 
 const generateSquares = () => {
@@ -12,17 +12,17 @@ const generateSquares = () => {
   let currentId = 0;
 
   for (let row = 0; row < 3; row += 1) {
-    squares.push([]); //adding squares to square
+    squares.push([]); //adding square to squares
     for (let col = 0; col < 3; col += 1) {
       squares[row].push({
         id: currentId,
         value: '',
-      }); //creating a 3x3 array
+      }); //creating a 3x3 array; each square has an id and value
       currentId += 1;
     }
   }
 
-  return squares;
+  return squares; //board is constructed
 }
 
 const App = () => {
@@ -39,6 +39,7 @@ const App = () => {
   
 
 //PSE code, check for winner
+//accessing value of squares on board through .value notation
   const checkForWinner = () => {
 
     let i=0;
@@ -83,13 +84,14 @@ const App = () => {
     while (row < 3 && !found) {
       while (col < 3 && !found) {
         let currentSquare = newSquares[row][col];
+        //id of square matches the current square
         if (currentSquare.id === id) {
           console.log(currentSquare);
           if (currentSquare.value !== '') return;
 
           found = true;
           currentSquare.value = currentPlayer;
-          setNumSquaresFilled(numSquaresFilled + 1);
+          setNumSquaresFilled(numSquaresFilled + 1);//one square behind
           if (currentPlayer === PLAYER_1) {
             setCurrentPlayer(PLAYER_2)
           } else {
