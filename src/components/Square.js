@@ -8,22 +8,12 @@ const Square = ({id, value, onClickCallback}) => {
   
     // What they gave us: return <button className="square"> {props.value} </button>
 
-    // think this is wrong:
-    // const markSquare = () => {
-    //   props.onClickCallback(props.id);
-    // };
-
-    const markSquare= () => {
-      onClickCallback(id)
-      console.log(`Updating square with ${value}`)
-    }
-  
 
     return (
       <button className="square" 
         id={id} 
         value={value} 
-        onClick={markSquare}
+        onClick={() => onClickCallback(id)}
         > {value} 
       </button>
     )  
