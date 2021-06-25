@@ -83,7 +83,7 @@ Running tests should help us check if we're going in the right direction. It is 
 ## Wave 1
 
 The wave 1 tests exist in the files:
-
+yarn
 - `src/components/Board.test.js`
 - `src/components/Square.test.js`
 
