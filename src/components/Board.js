@@ -3,6 +3,51 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
+// const SAMPLE_BOARD = [
+//   [
+//     {
+//       value: 'X',
+//       id: 0,
+//     },
+//     {
+//       value: 'X',
+//       id: 1,
+//     },
+//     {
+//       value: 'O',
+//       id: 2,
+//     },
+//   ],
+//   [
+//     {
+//       value: 'X',
+//       id: 3,
+//     },
+//     {
+//       value: 'X',
+//       id: 4,
+//     },
+//     {
+//       value: 'O',
+//       id: 5,
+//     },
+//   ],
+//   [
+//     {
+//       value: 'O',
+//       id: 6,
+//     },
+//     {
+//       value: 'O',
+//       id: 7,
+//     },
+//     {
+//       value: 'X',
+//       id: 8,
+//     },
+//   ],    
+// ];
+
 
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
@@ -13,16 +58,12 @@ const generateSquareComponents = (squares, onClickCallback) => {
   for (let i = 0; i < squares.length; i++) {
     squareComponents = squareComponents.concat(squares[i])
   }
-  return squareComponents.map((squares) => {
-    return <Square key={squareComponents.id} id={squareComponents.id} value={squareComponents.value}
-onClickCallback={onClickCallback}></Square>})}
+  return squareComponents.map((square) => {
+    return <Square key={square.id} id={square.id} value={square.value} onClickCallback={(id) => onClickCallback(id)}/>})
+}
 
 const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
-  return <div className="grid" >
-    {squareList}
-  </div>
+  return generateSquareComponents(squares, onClickCallback);
 }
 
 Board.propTypes = {
