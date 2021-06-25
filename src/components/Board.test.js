@@ -46,7 +46,7 @@ const SAMPLE_BOARD = [
       value: 'X',
       id: 8,
     },
-  ],
+  ],    
 ];
 
 describe('Wave 1: Board', () => {
