@@ -32,6 +32,7 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [player, setPlayer] = useState(PLAYER_1);
   const [winner, setWinner] = useState(null);
+  const [emptySquares, setEmptySquares] = useState(9);
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -39,23 +40,29 @@ const App = () => {
   //   Then pass it into the squares as a callback
   const updateSquare = (id) => {    
     
-    const squaresCopy = [...squares];
+    if (winner === null) {
 
-    for (let r = 0; r < squaresCopy.length; r++) {
-      for (let c = 0; c < squaresCopy[r].length; c++) {
-        if (squaresCopy[r][c].id === id && squaresCopy[r][c].value === '') {
-          squaresCopy[r][c].value = player;
-          if (player === PLAYER_1) {
-            setPlayer(PLAYER_2);
-          } else {
-            setPlayer(PLAYER_1);
+      const squaresCopy = [...squares];
+
+      for (let r = 0; r < squaresCopy.length; r++) {
+        for (let c = 0; c < squaresCopy[r].length; c++) {
+          if (squaresCopy[r][c].id === id && squaresCopy[r][c].value === '') {
+            squaresCopy[r][c].value = player;
+            if (player === PLAYER_1) {
+              setPlayer(PLAYER_2);
+              setEmptySquares(emptySquares - 1);
+            } else {
+              setPlayer(PLAYER_1);
+              setEmptySquares(emptySquares - 1);
+            };
           };
         };
       };
-    };
 
-  setSquares(squaresCopy);
-  setWinner(checkForWinner())
+    setSquares(squaresCopy);
+    setWinner(checkForWinner())
+
+    };
 
   }
 
@@ -98,9 +105,17 @@ const App = () => {
 
   }
 
-  const displayWinner = (winner === null ? `Current Player: ${player}` : `Winner is: ${winner}`);
-
-  
+  const statusHeader = () => {
+    if (winner === 'x') {
+      return (`Winner is x`);
+    } else if (winner === 'o') {
+      return (`Winner is o`);
+    } else if (emptySquares === 0) {
+      return (`It's a tie!`);
+    } else {
+      return (`Current Player: ${player}`);
+    }
+  };
 
 
   const resetGame = () => {
@@ -111,7 +126,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>{displayWinner}</h2>
+        <h2>{statusHeader()}</h2>
         <button>Reset Game</button>
       </header>
       <main>
