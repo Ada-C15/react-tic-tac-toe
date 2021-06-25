@@ -6,23 +6,23 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
 
-  const squareArray = [];
+  const singleArraySquares = [].concat(...squares);
 
-  squares.forEach(row => {
-    row.forEach(square => {
-      squareArray.push(square);
-    });
-  });
-
-  const boardComponents = squareArray.map(square => {
+  const boardComponents = singleArraySquares.map((square) => {
     return (
-    <Square key ={ square.id } id = { square.id } value = { square.value } />
+    <Square 
+    key ={ square.id } 
+    id = { square.id } 
+    value = { square.value } 
+    onClickCallback = {onClickCallback} />
     );
   });
 
   return boardComponents 
 
 };
+
+
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
@@ -37,7 +37,7 @@ Board.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        value: PropTypes.string.isRequired
+        value: PropTypes.string.isRequired,
       })
     )
   ),
