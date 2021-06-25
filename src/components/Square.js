@@ -9,7 +9,7 @@ const Square = (props) => {
   //  component when it's clicked on.
   const onPlayerMove = () => {
     props.onClickCallback(props.id);
-  }
+  };
 
   return <button
     className="square"
