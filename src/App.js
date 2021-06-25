@@ -3,9 +3,10 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 let gameCount = 0;
+let winner = ''
 
 const generateSquares = () => {
   //can this be created as flat after wave 5?
@@ -27,6 +28,35 @@ const generateSquares = () => {
   return squares;
 }
 
+const checkForWinner = (squares) => {
+  if (gameCount <=3){
+    return 'Keep Playing'
+  }
+    let patterns = [
+    //rows
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    //cols
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    //dia
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+  for (let i = 0; i < patterns.length; i++) {
+
+    const [a, b, c] = patterns[i]; //destructuring assignment to get indexes
+    if (squares[a].value && (squares[a].value === squares[b].value) && (squares[a].value === squares[c].value)) {
+      return squares[a].value;
+      }
+    }
+    if (gameCount < 9){
+      return 'none yet'
+    }
+      return 'Tie';
+}
 const App = () => {
 
   // This starts state off as a 2D array of JS objects with
@@ -36,8 +66,8 @@ const App = () => {
   const gameMove = (squareToUpdate, squares) =>{
     const squaresUpdate = squares.map(square =>{
       if (square.id === squareToUpdate){
-        if (player == PLAYER_1){
-          if (square.set == false){
+        if (player === PLAYER_1){
+          if (square.set === false){
             // could refactor 
             square.value = 'x';
             square.set = true
@@ -45,8 +75,8 @@ const App = () => {
             gameCount +=1;
           }
         }
-        else if (player == PLAYER_2){
-          if (square.set == false){
+        else if (player === PLAYER_2){
+          if (square.set === false){
             square.value = 'o';
             square.set = true
             setMove(PLAYER_1);
@@ -58,24 +88,15 @@ const App = () => {
         return square;
       }
     })
+    winner = checkForWinner(squaresUpdate)
     return setSquares(squaresUpdate);
   }
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
-
-  }
-
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
+    gameCount = 0;
+    winner = '';
+    setMove(PLAYER_1);
   }
   
   return (
@@ -83,8 +104,8 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>Now Playing: {player}</h2>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>The winner is ...{winner}-- Fill in for wave 3 </h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={gameMove}/>

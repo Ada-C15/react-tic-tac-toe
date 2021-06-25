@@ -9,7 +9,6 @@ const generateSquareComponents = (squares, onClickCb) => {
 
   let mapped = sa.map((square) =>{
     const clickHandler = square => {
-      console.log(square, 'click handler')
       onClickCb(square, sa);
     };
     return(
