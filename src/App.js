@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -31,43 +31,36 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
 
-  const [currentPlayer, changePlayer] = useState(PLAYER_1);
+  const [currentPlayer, switchPlayer] = useState(PLAYER_1);
 
   // Wave 2
-  const makeMove = (id, currentPlayer) => {
-    new_board = squares;
-    if (id == 0) {
-      new_board[0][0].value = currentPlayer;
-    } else if (id == 1) {
-      new_board[0][1].value = currentPlayer;
-    } else if (id == 2) {
-      new_board[0][2].value = currentPlayer;
-    } else if (id == 3) {
-      new_board[1][0].value = currentPlayer;
-    } else if (id == 4) {
-      new_board[1][1].value = currentPlayer;
-    } else if (id == 5) {
-      new_board[1][2].value = currentPlayer;
-    } else if (id == 6) {
-      new_board[2][0].value = currentPlayer;
-    } else if (id == 7) {
-      new_board[2][1].value = currentPlayer;
-    } else if (id == 8) {
-      new_board[2][2].value = currentPlayer;
+  const updateBoard = (updatedSquare) => {
+    const newBoard = squares;
+    for (let i=0; i < newBoard.length; i++) {
+      let row = newBoard[i];
+      for (let j=0; j < row.length; j++) {
+        if (newBoard[i][j].id === updatedSquare.id) {
+          // We only want to switch turns if the player has clicked on a valid square
+          if (newBoard[i][j] !== updatedSquare) switchTurns();
+          newBoard[i][j] = updatedSquare;
+          break;
+        }
+      }
     }
-    setSquares(new_board);
+  
+    setSquares(newBoard);
+  }
+
+  const switchTurns = () => {
+    if (currentPlayer === PLAYER_1) {
+      return switchPlayer(PLAYER_2);
+    } else {
+      return switchPlayer(PLAYER_1);
+    }
   }
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
-
-  const switchTurns = () => {
-    if (currentPlayer == PLAYER_1) {
-      changePlayer(PLAYER_2);
-    } else {
-      changePlayer(PLAYER_1);
-    }
-  }
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -94,7 +87,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={ squares } onClickCallback={ makeMove } />
+        <Board squares={ squares } onClickCallback={ updateBoard } currentPlayer={ currentPlayer } />
       </main>
     </div>
   );
