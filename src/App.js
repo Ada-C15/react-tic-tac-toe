@@ -50,8 +50,7 @@ const App = () => {
     });
 
 
-     // setWinner(checkForWinner());
-    // put this inside while loop
+    
     if (currentPlayer === PLAYER_1) {
       setCurrentPlayer(PLAYER_2)
     } else if (currentPlayer === PLAYER_2) {
