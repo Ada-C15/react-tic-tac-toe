@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './Square.css'
 
 const Square = (props) => {
-  console.log('props:', props)
+  // console.log('props:', props)
 
   return <button
     className="square"
-    onClick={() => props.clickSquare(props.id, props.value)}
+    onClick={() => props.onClickCallback(props.id, props.value)}
   >
     {props.value}
   </button>

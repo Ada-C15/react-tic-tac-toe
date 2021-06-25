@@ -10,7 +10,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
     squareComponents = squareComponents.concat(squares[i])
   }
   return squareComponents.map((square) => {
-    return <Square key={square.id} id={square.id} value={square.value} clickSquare={onClickCallback}></Square>
+    return <Square key={square.id} id={square.id} value={square.value} onClickCallback={onClickCallback}></Square>
   })
 
 };
@@ -18,7 +18,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log('hello', squareList);
+  // console.log('hello', squareList);
   return <div className="grid" >
     {squareList}
   </div>
