@@ -30,6 +30,7 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   const [player, setPlayer] = useState(PLAYER_1);
+  const [winner, setWinner] = useState(null);
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -42,42 +43,54 @@ const App = () => {
         if (square.id === id && square.value === ''){
           if (player === PLAYER_1) {
             setPlayer(PLAYER_2);
-            square.value = PLAYER_1
-            console.log(PLAYER_2)
+            square.value = 'x'
           } else {
             setPlayer(PLAYER_1);
-            square.value = PLAYER_2
-            console.log(PLAYER_1)
+            square.value = 'o'
           }
         }
+        checkForWinner()
       })
     })
   }
-
+  
   const checkForWinner = () => {
     // Complete in Wave 3
     // You will need to:
-    // 1. Go accross each row to see if 
+    // 1. Go across each row to see if 
     //    3 squares in the same row match
     //    i.e. same value
     // 2. Go down each column to see if
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
-
+  
+    let entireBoard = []
+    squares.forEach((row)=>{
+      row.forEach(square=> {
+        if (square.value){
+          entireBoard.push(square.value)
+        }
+      })
+    })
+    if (entireBoard.length===9){
+      setWinner("JK! It's a Tie")
+    }
   }
-
+  
+  
   const resetGame = () => {
     // Complete in Wave 4
     setPlayer(PLAYER_1);
     setSquares(generateSquares())
+    setWinner(null)
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is ...{winner}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
