@@ -16,7 +16,7 @@ const generateSquares = () => {
     for (let col = 0; col < 3; col += 1) {
       squares[row].push({
         id: currentId,
-        value: '-',
+        value: '',
       });
       currentId += 1;
     }
@@ -30,6 +30,7 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   const [currPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const [currWinner, setWinner] =useState('no one yet')
 
   const updateSquareData = (updatedSquare) => {
 
@@ -50,18 +51,59 @@ const App = () => {
       setCurrentPlayer(PLAYER_1)
 
     }
-    console.log('changed player should have happened!')
-  }
+    let finalWinner = checkForWinner(newSquares)
+    console.log(finalWinner);
+    setWinner(finalWinner);
+    console.log('checkforwinner function passed sucessfully!')
+  };
 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
+  const checkRows = (matrix) => {
+    for (let i=0; i<matrix.length; i++) {
+      const row = matrix[i];
 
-  const checkForWinner = () => {
+      let squareSet = new Set(row.map(item =>item.value));
 
+      if (squareSet.size === 1 && !squareSet.has(''))  {
+        let winnerArr = Array.from(squareSet)
+        console.log('we found the winner!')
+        return(winnerArr[0])
+      }}
+      return false
 
+  }
+
+  const checkForWinner = (newSquares) => {
+    const checkBoardRows = checkRows(newSquares);
+    if (checkBoardRows) {return checkBoardRows};
+
+    const inverseBoard = newSquares[0].map((_, colIndex) => newSquares.map(row => row[colIndex]));
+    const checkBoardColumns = checkRows(inverseBoard);
+    if (checkBoardColumns) {return checkBoardColumns};
+    
+
+    let firstdia = new Set([newSquares[0][0].value, newSquares[1][1].value, newSquares[2][2].value,])
+    let seconddia = new Set([newSquares[0][2].value, newSquares[1][1].value, newSquares[2][0].value,])
+    if (firstdia.size === 1 && !firstdia.has(''))  {
+      let winnerArr = Array.from(firstdia)
+      console.log('we found the winner in a diagonal!')
+      return(winnerArr[0])
+    }
+    if (seconddia.size === 1 && !seconddia.has(''))  {
+      let winnerArr = Array.from(seconddia)
+      console.log('we found the winner in a diagonal!')
+      return(winnerArr[0])
+    }
+    
+    return('No one yet')
+
+  }
+    
+    
 
     // Complete in Wave 3
     // You will need to:
@@ -72,8 +114,7 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
-
-  }
+  
 
   const resetGame = () => {
     // Complete in Wave 4
@@ -83,7 +124,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is {currWinner} </h2>
         <button>Reset Game</button>
       </header>
       <main>
