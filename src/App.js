@@ -53,7 +53,6 @@ const App = () => {
       while (col < 3 && !found) {
         let currentSquare = newSquares[row][col];
         if (currentSquare.id === id) {
-          // console.log(currentSquare);
           if (currentSquare.value !== '') return;
 
           found = true;
@@ -74,9 +73,9 @@ const App = () => {
     setSquares(newSquares);
   }
 
-
+  // ✅ Wave 3: Implement the function `checkForWinner` in the App component
   const checkForWinner = () => {
-    // ✅ Wave 3: Identify winner
+  
     let i = 0;
 
     while (i < 3) {
@@ -91,6 +90,7 @@ const App = () => {
       }
       i += 1;
     }
+
     if (squares[0][0].value === squares[1][1].value &&
       squares[2][2].value === squares[1][1].value &&
       squares[1][1].value !== '') {
@@ -107,18 +107,15 @@ const App = () => {
 
   }
 
-  const resetGame = () => {
-  
-  }
 
     // ✅ Wave 1: Renders a `Board` component
     // ✅ Wave 2: The PropTypes of Board state that there is a required prop named `onClickCallback` - The value of this prop must be a function
-    // ✅ Wave 3: Display correct winner 
+    // ✅ Wave 3: The winner's "name" ("X" or "O") appears in the heading.
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>{winner === null ? `Current Player { currentPlayer }` : `Winner is ${ winner }`}</h2>
+        <h2>{winner === null ? `Current Player ${ currentPlayer }` : `Winner is ${ winner }`}</h2>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquares} />
