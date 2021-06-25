@@ -8,12 +8,11 @@ const PLAYER_2 = 'O';
 
 const generateSquares = () => {
   const squares = [];
-
   let currentId = 0;
 
   for (let row = 0; row < 3; row += 1) {
     squares.push([]);
-    for (let col = 0; col < 3; col += 1) {
+    for (let column = 0; column < 3; column += 1) {
       squares[row].push({
         id: currentId,
         value: '',
@@ -21,7 +20,6 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
   return squares;
 }
 
@@ -32,29 +30,30 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
   const [numSquaresClicked, setNumSquaresClicked] = useState(0);
-  const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState('...');
 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const updateGameState = (id) => {
-    if (winner !== null) return;
+    if (winner === PLAYER_1 || winner === PLAYER_2) return;
 
     const clickedSquares = [...squares];
+    // console.log(clickedSquares)
       let row = 0;
-      let col = 0;
+      let column = 0;
       let clicked = false;
 
       while (row <3 && !clicked) {
-        while (col <3 && !clicked) {
-          let currentSquare = clickedSquares[row][col];
+        while (column <3 && !clicked) {
+          let currentSquare = clickedSquares[row][column];
           if (currentSquare.id === id) {
-            console.log(currentSquare);
             if (currentSquare.value !== '') return;
-        
-            clicked = true;
+      
             currentSquare.value = currentPlayer;
+            clicked = true;
+        
             setNumSquaresClicked(numSquaresClicked + 1);
             if (currentPlayer === PLAYER_1) {
               setCurrentPlayer(PLAYER_2)
@@ -62,26 +61,41 @@ const App = () => {
                 setCurrentPlayer(PLAYER_1);
             }
           }
-          col += 1;
+          column += 1;
         }
       row += 1;
-      col = 0;
+      column = 0;
       }
+      setWinner(checkForWinner());
       setSquares(clickedSquares);
-  }
-
+      }
+    
 
   const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
+    // check diagonals for winner
+    if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value & squares[0][0].value !== '') {
+      return squares[0][0].value;
+    } else if (squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value && squares[0][0].value !== '') {
+      return squares[0][2].value;
+    } 
 
+    // check rows and columns for winner
+    for (let i = 0; i < 3; i++) {
+      if (squares[i][0].value === squares[i][1].value && squares[i][1].value === squares[i][2].value && squares[i][0].value !== '') {
+        return squares[i][0].value;
+      } else if (squares[0][i].value === squares[1][i].value && squares[1][i].value === squares[2][i].value && squares[0][i].value !== '') {
+        return squares[0][i].value;
+      }
+    }
+    
+    // If winner is a Tie...
+    for (let rows = 0; rows < 3; rows++) {
+      for (let col = 0; col < 3; col++) {
+        if (squares[rows][col].value === '') {
+          return '...';
+        }
+      }}
+    return 'a tie!'
   }
 
   const resetGame = () => {
@@ -91,8 +105,9 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h1>Marisa's Tic Tac Toe</h1>
+        <h2>It's {currentPlayer}'s turn</h2>
+        <h2>{`The Winner is ${winner}`}</h2>
         <button>Reset Game</button>
       </header>
       <main>
