@@ -26,21 +26,23 @@ const App = () => {
   const [isX, setIsX] = useState(true);
 
   const markSquare = (id) => {
-    console.log(id)
-    for(let i=0; i<squares.length; i++) {
-      for(let j=0; j<squares[i].length; j++) {
-        if (squares[i][j].id === id) {
+    //can re-render if we write-over read-only squares var.  in this case, it would allow though
+    //because the setIsX is called FIRST, but that is not normal.  so created newSquares as duplicate array
+    const newSquares = [...squares]
+    for(let i=0; i<newSquares.length; i++) {
+      for(let j=0; j<newSquares[i].length; j++) {
+        if (newSquares[i][j].id === id) {
           if (isX) {
-            squares[i][j].value = 'X';
+            newSquares[i][j].value = 'X';
           }
           else{
-            squares[i][j].value = 'O';
+            newSquares[i][j].value = 'O';
           }
         }
       };  
     };
     setIsX(!isX)
-    setSquares(squares)
+    setSquares(newSquares)
     const winner = checkForWinner(squares)
     if (winner) {
       console.log(`The winner is: ${winner}`)

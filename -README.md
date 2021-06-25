@@ -221,4 +221,4 @@ Follow the [testing directions in this project doc](./ada-project-docs/testing-r
 
 ## Optional Enhancements
 
-Should a project be completed before submission, and there is a desire for more practice, check out our [list of optional enhancements](./ada-project-docs/optional-enhancements.md)!
+Should a project be completed before submission, and there is a desire for more practice, check out our [list of optional enhancements](./ada-project-docs/*optional*-enhancements.md)!
