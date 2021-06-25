@@ -24,31 +24,12 @@ const generateSquares = () => {
   return squares;
 }
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
-
 const App = () => {
 
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
+  const [nextPlayer, setNextPlayer]= useState(true)
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
@@ -56,7 +37,7 @@ const App = () => {
   // const updateGameState = () => {
   //   setSquares(squares.value = 'X')
   // }
-  const checkForWinner = () => {
+  const checkForWinner = (squares) => {
     // Complete in Wave 3
     // You will need to:
     // 1. Go across each row to see if 
@@ -66,8 +47,25 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
-
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a];
+      }
+    }
+    return null;
   }
+  
 
   const resetGame = () => {
     // Complete in Wave 4
@@ -77,11 +75,11 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is {checkForWinner} -- Fill in for wave 3 </h2>
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />ate
+        <Board squares={squares} />
       </main>
     </div>
   );
