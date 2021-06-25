@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -30,11 +30,43 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const [countFilledSqare, setCountFilledSqare] = useState(0);
+  const [winner, setWinner] = useState(null);
 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+  const handleClick = (id) => {
+    const squaresCopy = [...squares] //clone an array with spread operator
+
+    for(let row in squaresCopy) {
+      for(let col in squaresCopy) {
+        let filledSquare = squaresCopy[row][col];
+    
+        // if a user click a filled square or if game is won, return!
+        if (winner || countFilledSqare === 9) {
+          return;
+        }
+
+        if (filledSquare.id === id && filledSquare.value === '' && !winner) {
+          filledSquare.value = currentPlayer;
+          // Update states
+          setCountFilledSqare(countFilledSqare + 1);
+          setSquares(squaresCopy);
+          switchPlayer(currentPlayer);
+          setWinner(checkForWinner());
+          return;
+        };
+      };  
+    };
+  }
+  // helper funciton for handleClick
+  const switchPlayer = () => {
+    currentPlayer === PLAYER_1 ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1);
+  }
+
 
 
   const checkForWinner = () => {
@@ -62,7 +94,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={handleClick}/>
       </main>
     </div>
   );
