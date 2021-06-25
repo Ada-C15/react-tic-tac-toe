@@ -30,6 +30,7 @@ const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1)
   const[winner, setWinner] = useState('');
   const[gameState, setState] = useState(true)
+  const[count, setCount] = useState(0)
 
   const updateSquare = (id, value) => {
     return () => {
@@ -47,6 +48,7 @@ const App = () => {
         })
 
         setSquares(newSquares)
+        setCount(count+1)
         
           if (currentPlayer === PLAYER_1) {
             setCurrentPlayer(PLAYER_2)
@@ -102,6 +104,14 @@ const App = () => {
           squares[0][2].value !== '') {
             winner = (squares[0][2].value);
           }
+    //check for tie
+    if (count === 9) {
+      setState(false)
+    }
+
+    if (gameState === false && !winner) {
+      winner = 'no one! It\'s a tie!'
+    }
 
     if (winner) {
       setWinner(winner);
@@ -124,6 +134,7 @@ const App = () => {
     setCurrentPlayer(PLAYER_1)
     setWinner('')
     setState(true)
+    setCount(0)
     
   }
 
