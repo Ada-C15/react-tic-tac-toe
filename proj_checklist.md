@@ -66,3 +66,20 @@ So the goal is to convert the above 2D array into [0,1,2,3,4,5,6,7,8]
 
 
 # Wave 3
+
+## `App` component
+
+When a user places an "X" or "O" mark, the game should check if there is a winner. If a mark creates a line of three matching marks (lines can be horizontal, vertical, or diagonal), then:
+
+The player who made the mark becomes the winner.
+The winner's "name" ("X" or "O") appears in the heading.
+All squares become unclickable.
+The game is a tie if there are no more available squares and no winner has been declared. At this point, all squares are unclickable.
+
+To accomplish this:
+
+Implement the function checkForWinner in the App component
+Ensure that the winner's name appears
+Hints
+
+Begin implementing checkForWinner by creating a "brute force" solution first

@@ -76,18 +76,9 @@ const App = () => {
 
 
   const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
+    // ✅ Wave 3: Identify winner
     let i = 0;
 
-    // Check all the rows and columns for a winner
     while (i < 3) {
       if (squares[i][0].value === squares[i][1].value &&
         squares[i][2].value === squares[i][1].value &&
@@ -117,17 +108,17 @@ const App = () => {
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+  
   }
 
     // ✅ Wave 1: Renders a `Board` component
     // ✅ Wave 2: The PropTypes of Board state that there is a required prop named `onClickCallback` - The value of this prop must be a function
+    // ✅ Wave 3: Display correct winner 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>{winner === null ? `Current Player { currentPlayer }` : `Winner is ${ winner }`}</h2>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquares} />
