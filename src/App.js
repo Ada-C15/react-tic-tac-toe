@@ -8,20 +8,14 @@ const PLAYER_2 = 'O';
 
 const generateSquares = () => {
   const squares = [];
-
   let currentId = 0;
-
-  for (let row = 0; row < 3; row += 1) {
-    squares.push([]);
-    for (let col = 0; col < 3; col += 1) {
-      squares[row].push({
+    for (let i = 0; i < 9; i++) {
+      squares.push({
         id: currentId,
         value: '',
       });
       currentId += 1;
-    }
-  }
-
+    } 
   return squares;
 }
 
@@ -36,6 +30,11 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
+  const onClickCallback = (id) => {
+    squares[id].value = 'X'
+    setSquares(squares => [...squares])
+
+  }
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -62,7 +61,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <div className="grid"><Board squares={squares} onClickCallback={(id) => onClickCallback(id)}/></div> 
       </main>
     </div>
   );
