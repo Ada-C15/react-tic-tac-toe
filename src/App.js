@@ -3,9 +3,9 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
-// let winner = false;
+// const PLAYER_1 = 'X';
+// const PLAYER_2 = 'O';
+
 
 const generateSquares = () => {
   const squares = [];
@@ -47,7 +47,7 @@ const App = () => {
 
   };
 
-  const [winner, checkWinner] = useState('')
+  const [winner, updateWinnerStatus] = useState(null)
 
   const [squares, setSquares] = useState(generateSquares());
 
@@ -71,30 +71,16 @@ const App = () => {
       };
 
     setSquares(updatedSquares);
-    let winnerAgain = checkForWinner(updatedSquares);
-    checkWinner(winnerAgain)
+    let winnerResult = checkForWinner(updatedSquares);
+    updateWinnerStatus(winnerResult)
 
-    // checkForWinner(); check the current state of squares for winner after each click
 
-    // if (checkForWinner(squares)) {
-    //   let winner = checkForWinner(squares);
-    // }
 
     };
-
-    // console.log(squares)
   }
 
   const checkForWinner = (squares) => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
+
 
     for(let i=0; i < squares.length; i++) {
 
@@ -119,7 +105,21 @@ const App = () => {
       return squares[0][2]['value'];
     };
 
-    return '';
+    let count = 0
+    for(let i=0; i < squares.length; i++) {
+      for(let j=0; j < squares.length; j++) {
+
+        if (squares[i][j]['value']) {
+          count += 1;
+          if(count === 9) {
+            return 'tie';
+          };
+        };
+      };
+
+      };
+
+    return null;
 
   }
 
