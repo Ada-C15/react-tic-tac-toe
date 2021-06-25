@@ -14,3 +14,18 @@
   margin-bottom: 2em;
 }
 
+.App-header button{
+    padding:10px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: .5px solid #fff;
+    border-radius: 10px 10px 10px 10px;
+    border-color: hotpink;
+    background-color:thistle;
+    font-family:"Lucida Console","Courier New",monospace;
+    font-weight:bold;
+}
+
+.App-header button:hover{
+  width:20%
+}
