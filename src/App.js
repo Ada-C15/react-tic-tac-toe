@@ -37,13 +37,12 @@ const App = () => {
   const checkForWinner = () => {
 
     const isBoardFull = () => {
-      if (numSquaresChecked < 9) {
-        console.log('isBoardFull returns False');
-        return false;
-      } else {
-        console.log('isBoardFull returns True');
+
+      // Q: when function is invoked state is not updated yet, so we are always one step behind in numSquaresChecked. When update state event is completed? 
+      if ((numSquaresChecked + 1) === 9) {
         return true;
       }
+      return false;
     }
 
     const rowCheck = () => {
@@ -93,9 +92,8 @@ const App = () => {
       return null;
     }
 
-    if (isBoardFull) {
+    if (isBoardFull && !resultChecks) {
       console.log('It is a tie!');
-      setWinner('Tie');
       return 'Tie';
     }
   }
@@ -122,8 +120,8 @@ const App = () => {
         }
       }
     }
-    setWinner(checkForWinner());
     setSquares(updatedSquares);
+    setWinner(checkForWinner());
   }
 
 
@@ -135,12 +133,13 @@ const App = () => {
   }
 
   const displayWinner = () => {
-    if (winner === null) {
+    if (winner === 'Tie') {
+      return `It is a tie!`;
+    } else if (winner === null) {
       return `Current Player ${activePlayer}`;
     } else {
       return `Winner is ${winner}`
     }
-
   }
 
   return (
@@ -151,12 +150,12 @@ const App = () => {
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={updateGameState} />
+        <Board squares={squares}
+          onClickCallback={updateGameState}
+        />
       </main>
     </div>
   );
 }
 
 export default App;
-
-// .toUpperCase()
