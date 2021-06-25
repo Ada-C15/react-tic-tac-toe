@@ -49,9 +49,9 @@ const App = () => {
             square.value = 'o'
           }
         }
-        checkForWinner()
       })
     })
+    checkForWinner()
   }
   
   const checkForWinner = () => {
@@ -64,7 +64,10 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
-  
+   
+    // push values of each square into empty list
+    // if the length of list is 9, implying the board is full with no winner,
+    // we have a tie
     let entireBoard = []
     squares.forEach((row)=>{
       row.forEach(square=> {
@@ -73,19 +76,35 @@ const App = () => {
         }
       })
     })
+
+    // a bug exists here somewhere or elsewhere
+    if (entireBoard[0] === entireBoard[1] && entireBoard[0] === entireBoard[2]){
+      setWinner(entireBoard[0]);
+    } 
+    if (entireBoard[3] === entireBoard[4] && entireBoard[3] === entireBoard[5]){
+      setWinner(entireBoard[3]);
+    } 
+    if (entireBoard[6] === entireBoard[7] && entireBoard[7] === entireBoard[8]){
+      setWinner(entireBoard[6]);
+    } 
+    if (entireBoard[0] === entireBoard[4] && entireBoard[0] === entireBoard[8]){
+      setWinner(entireBoard[0]);
+    } 
+    if (entireBoard[2] === entireBoard[4] && entireBoard[2] === entireBoard[6]){
+      setWinner(entireBoard[2]);
+    }
     if (entireBoard.length===9){
-      setWinner("JK! It's a Tie")
+      setWinner("It's a TIE!")
     }
   }
-  
-  
+
   const resetGame = () => {
     // Complete in Wave 4
     setPlayer(PLAYER_1);
     setSquares(generateSquares())
     setWinner(null)
   }
-
+  
   return (
     <div className="App">
       <header className="App-header">
