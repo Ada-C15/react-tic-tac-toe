@@ -28,47 +28,29 @@ const generateSquares = () => {
 
 const App = () => {
 
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
-  const [currentPlayer, setPlayerState] = useState(PLAYER_1); //or is the state X? 
-
-  //if current is player1 then change to player2;
-
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
-    
-      
-      // onClick={() => {
-      //   nextSquares[i] = isXNext ? "X" : "O";
-      //   setSquares(nextSquares);
-              
-      // }}
-
+  const [currentPlayer, setPlayerState] = useState(PLAYER_1); 
 
     const squareId = (id) => {
-      // console.log(id);
-      // console.log(currentPlayer)
       setPlayerState(!currentPlayer);
       const player = currentPlayer ? PLAYER_1 : PLAYER_2;
       
       squares.forEach(row=>{
         row.forEach(square => {
           if (square.id === id) {
-            if (player === PLAYER_1) {
-              console.log(PLAYER_1)
-              square.value = 'x'
-
-            }else{
-              console.log(PLAYER_2)
-              square.value = 'o'
-            }
+            if(square.value === '')
+              if (player === PLAYER_1) {
+                console.log(PLAYER_1)
+                square.value = 'x'
+              }else{
+                console.log(PLAYER_2)
+                square.value = 'o'
+              }
+          }else if(square.value != ''){
+            checkForWinner()
           }
         })
-      })
-        
+      })   
     }
 
   const checkForWinner = () => {
@@ -81,6 +63,34 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
+    
+    //possible approach to calculating squares
+
+    // const options = [
+    //   [0,1,2],
+    //   [3,4,5],
+    //   [6,7,8],
+    //   [0,3,6],
+    //   [1,4,7],
+    //   [2,5,8],
+    //   [6,4,2],
+    //   [0,4,8]
+    // ]
+
+    // squares.forEach(row=>{
+    //   row.forEach(square=>{
+    //     for(let i = 0; i < options.length; i++) {
+    //       const [a, b, c] = options[i];
+    //       console.log(a)
+    //       if (square[a].value && square[a].value === square[b].value && square[a] === square[c]) {
+    //         console.log(square[a])
+    //         return square[a]
+    //       }
+    //     }
+
+    //   })
+    // })
+
 
   }
 
@@ -97,7 +107,6 @@ const App = () => {
       </header>
       <main>
         <Board squares={squares} onClickCallback = {squareId}/>
-        {/* Passing squares as props to Board */}
       </main>
     </div>
   );
