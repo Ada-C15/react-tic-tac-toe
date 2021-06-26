@@ -22,7 +22,8 @@ const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares);
   console.log(squareList);
   const squareComponents = squareList.map(square => {
-    return (<div key={square.id}><Square id={square.id} value={square.value} onClickCallback={onClickCallback}></Square></div>)
+    console.log(square)
+    return (<Square  key={square.id}id={square.id} value={square.value} onClickCallback={onClickCallback}></Square>)
   });
 
   return <div className="grid">{squareComponents}</div>

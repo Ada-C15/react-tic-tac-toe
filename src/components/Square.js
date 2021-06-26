@@ -9,7 +9,7 @@ const Square = ({id, value, onClickCallback}) => {
   //  component when it's clicked on.
   
 
-  return (<button onClick={() => onClickCallback(id)} className="square">{value}</button>)
+  return (<button onClick={(() => onClickCallback(id, value))} className="square">{value}</button>)
 }
 
 Square.propTypes = {
