@@ -37,18 +37,14 @@ const generateSquares = () => {
 }
 
 const App = () => {
-
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
+  //2D array state with empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
   const [countFilledSqare, setCountFilledSqare] = useState(0);
   const [winner, setWinner] = useState(null);
 
   // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  // Creates a method to change the square 
   const handleClick = (id) => {
     const squaresCopy = [...squares] //clone an array with spread operator
 
@@ -73,7 +69,7 @@ const App = () => {
       };  
     };
   }
-  // helper funciton for handleClick and resetGame
+  // helper funciton for handleClick() and resetGame()
   const switchPlayer = () => {
     currentPlayer === PLAYER_1 ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1);
   }
@@ -81,15 +77,7 @@ const App = () => {
 
 
   const checkForWinner = () => {
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
+    // Wave 3
     for(let i in BOARD) {
       const [a, b, c] = BOARD[i]
 
@@ -112,7 +100,7 @@ const App = () => {
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    // Wave 4
     switchPlayer(winner);
     setSquares(generateSquares());
     setCountFilledSqare(0);
