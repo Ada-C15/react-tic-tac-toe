@@ -18,7 +18,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
       />
     )
   })
-
 }
 
 const Board = ({ squares, onClickCallback }) => {
