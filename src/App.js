@@ -76,7 +76,6 @@ const App = () => {
         let currentMove = refresh[row][col];
         if (currentMove.id === squareId) {
           if (currentMove.value !== '') return;
-          console.log(row + ',' + col);
           active = false;
           currentMove.value = player;
           setTurns(turnsTaken + 1);
