@@ -3,16 +3,20 @@ import PropTypes from 'prop-types';
 
 import './Square.css'
 
-const Square = (props) => {
-  // For Wave 1 enable this 
-  //  Component to alert a parent 
-  //  component when it's clicked on.
-
-  return <button
-    className="square"
-  >
-    {props.value}
-  </button>
+const Square = ({id, value, onClickCallback}) => {
+    return (
+      <button className="square" 
+        id={id} 
+        value={value} 
+        onClick={() => {
+          if (value === '') {
+            onClickCallback(id)
+            }
+          }
+        }
+        > {value} 
+      </button>
+    )  
 }
 
 Square.propTypes = {
