@@ -1,25 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
 import './Square.css'
 
 const Square = (props) => {
-  // For Wave 1 enable this 
-  //  Component to alert a parent 
-  //  component when it's clicked on.
-  // const [isClicked, setIsClicked] = useState(false);
-
-  // const toggleState = () => {
-  //   setIsClicked(!isClicked);
-  // };
-
-  // return (
-  // <button onClick={toggleState}className="square">
-  //   {props.value}
-  // </button>
-  // );
-}
+  // find out what props contains
+  console.log(props)
+  // after clicking on the button 
+  return <button 
+    className="square" 
+    onClick={()=>
+    props.onClickCallback(props.id)}>
+      {props.value}
+    </button>
+};
+  // onClickCallback is passed to Square 1D array from Board.js
+  // gets called for the specific square that is clicked (hence id specification)
+//   const onSquareClick = () => {
+//     props.onClickCallback(props.id);
+//   };
+//   // return button with onSquareClick called, with class specification for CSS
+//   return (
+//   <button className='square' onClick={onSquareClick}>
+//     {props.value}
+//   </button>
+//   );
 
 Square.propTypes = {
   value: PropTypes.string.isRequired,
