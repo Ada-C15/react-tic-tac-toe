@@ -73,7 +73,7 @@ const App = () => {
       };  
     };
   }
-  // helper funciton for handleClick
+  // helper funciton for handleClick and resetGame
   const switchPlayer = () => {
     currentPlayer === PLAYER_1 ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1);
   }
@@ -113,15 +113,18 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    switchPlayer(winner);
+    setSquares(generateSquares());
+    setCountFilledSqare(0);
+    setWinner(null);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        {/* <h2>{winner === null ? `The winner is ${winner}` : `Current Player ${currentPlayer}`} </h2> */}
         <h2>{winner === null ? `Current Player ${ currentPlayer }` : `Winner is ${ winner }`}</h2>
-        <button>Reset Game</button>
+        <button className='anime-button' onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={handleClick}/>
