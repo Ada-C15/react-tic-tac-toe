@@ -119,6 +119,13 @@ const App = () => {
     setWinner(null);
   }
 
+  //additional feature to set a tie. 
+  const checkTie = () => {
+    if (countFilledSqare === 9 && !winner) {
+      return setWinner('Cat tie');
+    };
+  }
+
   return (
     <div className="App">
       <header className="App-header">
