@@ -37,26 +37,11 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
-  // model it after this func from student project
-
-  // const updateStudent = (studentToUpdate) => {
-  //   const students = studentData.map((student) => {
-  //     if (student.id === studentToUpdate.id) {
-  //       // great way to toggle back bewteen true and false
-  //       // student.present = !student.present;
-
-  //       // return the student i want to change
-  //       return studentToUpdate;
-  //     }
-  //     // else just return the student from my state
-  //     return student;
-  //   });
-  const updateSquare = (id) => {
+  const updateSquares = (id) => {
     // make a new array of squares to map out each individual square
     const newSquares = squares.map((row) => {
       return row.map((square) => {
-        // if square on this it. matches the id that got passed in
-        // and if value is empty
+        // if square on this and if value is empty, it matches the id that got passed in
         if (square.id === id && !square.value) {
           // holds whether its x or o
           square.value = player
@@ -66,14 +51,12 @@ const App = () => {
         return square
       })
     })
-    setSquares(newSquares)
-    checkForWinner()
     // going to hold the updated squares
+    setSquares(newSquares)
+    // check for winner after each turn
+    checkForWinner()
   }
-  // witht he id ur going to detect if a square componet has been clicked, and grab the id and mark it as x or o
-  // create a variable to hold current move and assign to x or o - boolean to switch or create a variable that gets reassign
-  // use useState to represent the current player
-  // onClick call back prop is a function and that function will go ahead and determine who the player is and how to mark the square
+
   const checkForWinner = () => {
     // Complete in Wave 3
     // You will need to:
@@ -92,7 +75,6 @@ const App = () => {
       squares[0][0].value !== ''
     ) {
       setWinner(squares[1][1].value)
-      console.log(setWinner)
       return
     }
     if (
@@ -101,7 +83,6 @@ const App = () => {
       squares[0][2].value !== ''
     ) {
       setWinner(squares[1][1].value)
-      console.log(setWinner)
       return
     }
 
@@ -134,8 +115,6 @@ const App = () => {
     // Complete in Wave 4
   }
 
-  // const dummy = () => {}
-  // put this in board
   return (
     <div className="App">
       <header className="App-header">
@@ -144,8 +123,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={updateSquare} />
-        {/* could take out onclickcallback here */}
+        <Board squares={squares} onClickCallback={updateSquares} />
       </main>
     </div>
   )
