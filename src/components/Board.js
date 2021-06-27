@@ -16,10 +16,10 @@ const generateSquareComponents = (squares, onClickCallback) => {
   let squareComponents = flatArray.map((square) => {
     return (
       <Square 
-      key={square.id}
-      id={square.id}
-      value={square.value}
-      onClickCallback={onClickCallback}
+        key={square.id}
+        id={square.id}
+        value={square.value}
+        onClickCallback={onClickCallback}
       />
     );
   });
