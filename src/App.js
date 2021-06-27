@@ -25,11 +25,47 @@ const generateSquares = () => {
 }
 
 const App = () => {
-
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
-  const [nextPlayer, setNextPlayer]= useState(true)
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const [winner, setWinner] = useState(null);
+  const [numSquaresFilled, setNumSquaresFilled] = useState(0)
+
+  const updateSquares = (id) => {
+    if (winner !== null) {
+      return 
+    };
+
+    const newSquares = [...squares];
+    let row = 0;
+    let col = 0;
+    let found = false;
+
+    while (row < 3 && !found) {
+      while (col < 3 && !found) {
+        let currentSquare = newSquares[row][col];
+        if (currentSquare.id === id) {
+          if (currentSquare.value !== '') return;
+          found = true;
+          currentSquare.value = currentPlayer;
+          setNumSquaresFilled(numSquaresFilled + 1);
+          if (currentPlayer === PLAYER_1) {
+            setCurrentPlayer(PLAYER_2)
+          } else {
+            setCurrentPlayer(PLAYER_1);
+          }
+
+          }
+          col += 1;
+        }
+        row +=1;
+        col = 0
+      }
+      setWinner(checkForWinner());
+      setSquares(newSquares)
+    }
+  
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
@@ -69,6 +105,10 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    setSquares(generateSquares());
+    setCurrentPlayer(PLAYER_1);
+    setNumSquaresFilled(0);
+    setWinner(null);
   }
 
   return (
@@ -76,10 +116,10 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is {checkForWinner} -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquares}/>
       </main>
     </div>
   );
