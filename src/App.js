@@ -3,8 +3,8 @@ import './App.css';
 import Board from './components/Board';
 // import Square from './components/Square';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -35,22 +35,38 @@ const App = () => {
   // Wave 2
   
   const onClickCallback = (event) => {
-    const existingButtonInnerText = event.target.innerText
-    if (existingButtonInnerText === '') {
-      const currentButtonId = event.target.id
-      const row = Math.floor(currentButtonId / 3)
-      const column = currentButtonId % 3
-    
-      const newSquares = generateSquares()
-      for (let r = 0; r < 3; r += 1) {
-        for (let c = 0; c < 3; c += 1) {
-          if (r === row && c === column) {
-            newSquares[r][c].value = currentPlayer
-          } else {
-            newSquares[r][c].value = squares[r][c].value
-          }          
-        }
+    // const existingButtonInnerText = event.target.innerText
+    // if (existingButtonInnerText === '') {
+    //   const currentButtonId = event.target.id
+    //   const row = Math.floor(currentButtonId / 3)
+    //   const column = currentButtonId % 3
+    // }
+    // const newSquares = generateSquares()
+    // for (let r = 0; r < 3; r += 1) {
+    //   for (let c = 0; c < 3; c += 1) {
+    //     if (r === row && c === column) {
+    //       newSquares[r][c].value = currentPlayer
+    //     } else {
+    //       newSquares[r][c].value = squares[r][c].value
+    //     }          
+    //   }
+    // }
+
+    // Start over this section: 
+    const currentButtonId = event.target.id
+    const row = Math.floor(currentButtonId / 3)
+    const column = currentButtonId % 3
+
+    const newSquares = generateSquares()
+    for (let r = 0; r < 3; r += 1) {
+      for (let c = 0; c < 3; c += 1) {
+        if (r === row && c === column && squares[r][c].value === '') {
+          newSquares[r][c].value = currentPlayer
+        } else {
+          newSquares[r][c].value = squares[r][c].value
+        }          
       }
+    
 
       setSquares(newSquares)
       checkForWinner(newSquares)
@@ -75,7 +91,11 @@ const App = () => {
     //    3 squares in the same row match
     //    i.e. same value
     for (let r = 0; r < 3; r++) {
-      const winnerExists = determineWinner(arr[r])
+      const row = []
+      for (let c = 0; c < 3; c++) {
+        row.push(arr[r][c].value)
+      }
+      const winnerExists = determineWinner(row)
       if (winnerExists) {
         return
       }
