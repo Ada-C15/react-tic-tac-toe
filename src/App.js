@@ -100,6 +100,10 @@ const App = () => {
     for (let d = 0; d < 3; d++) {
       diag1.push(arr[d][d].value)
     }
+    const diag1WinnerExists = determineWinner(diag1) //
+    if (diag1WinnerExists) {
+      return
+    }
 
     const diag2 = []
     for (let d = 0; d < 3; d++) {      
@@ -127,14 +131,17 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    setCurrentPlayer(PLAYER_1)
+    setSquares(generateSquares())
+    setWinnerString(defaultWinnerString)
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ...  </h2>
-        <button>Reset Game</button>
+        <h2 id='winnerString'> {winnerString} </h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback}/>
