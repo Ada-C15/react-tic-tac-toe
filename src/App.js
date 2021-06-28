@@ -67,10 +67,8 @@ const App = () => {
         }          
       }
     
-
-      setSquares(newSquares)
-      checkForWinner(newSquares)
-
+    setSquares(newSquares)
+    checkForWinner(newSquares)
       // const setCurrentPlayer = PLAYER_1 ? PLAYER_2: PLAYER_1;
       // OR //
       if (currentPlayer === PLAYER_1){
@@ -80,7 +78,8 @@ const App = () => {
       }
     }
   }
-    
+  
+
   // onClickCallback is the name of a property that belongs to the board  - but the function OnClickCallback is what it will do
   
   
