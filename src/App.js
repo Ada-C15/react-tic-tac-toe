@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -35,6 +35,25 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const [winner, setWinner] = useState(null);
+
+  const updateSquares = (id) => {
+
+    if (winner === PLAYER_1 || winner === PLAYER_2) return;
+
+    let clickedSquare = squares.flat().find(square => square.id === id);
+    if (clickedSquare.value !== '') return;
+    clickedSquare.value = currentPlayer;
+    
+    //  check who the current player is
+    if (currentPlayer == PLAYER_1) {
+      setCurrentPlayer(PLAYER_2);
+    } else {
+      setCurrentPlayer(PLAYER_1);
+    };
+    setWinner(checkForWinner());
+  };
 
 
   const checkForWinner = () => {
@@ -48,7 +67,9 @@ const App = () => {
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
 
-  }
+
+
+  };
 
   const resetGame = () => {
     // Complete in Wave 4
@@ -58,11 +79,12 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>Current player is {currentPlayer}</h2>
+        <h2>The winner is ...{winner} </h2>
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquares} />
       </main>
     </div>
   );

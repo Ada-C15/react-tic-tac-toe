@@ -15,15 +15,15 @@ const generateSquareComponents = (squares, onClickCallback) => {
   {
     squareBox = squareBox.concat(squares[i]);
   };
-}
   console.log(squareBox);
   //iterate through each index of squareBoxOne
+  //this sets the values to props: id, value and onClickCallback
   return squareBox.map((square, index) => {
     return <Square key={index} id={square.id} value={square.value}
     onClickCallback={onClickCallback} />
     console.log(`this is the grid`);
   });
-
+}
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
