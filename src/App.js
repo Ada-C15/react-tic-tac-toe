@@ -66,13 +66,36 @@ const App = () => {
     //    3 squares in each column match
     // 3. Go across each diagonal to see if 
     //    all three squares have the same value.
+    
+    //check if winner is in rows else they are in columns:
+    for (let i = 0; i < 3; i++) {
+      if (squares[i][0].value === squares[i][1].value && squares[i][1].value === squares[i][2].value && squares[i][0].value !== '') {
+        return squares[i][0].value;
+      } else if (squares[0][i].value === squares[1][i].value && squares[1][i].value === squares[2][i].value && squares [0][i].value !== '') {
+        return squares[0][i].value;
+      } 
+    }
+    //winner in both diagonals:
+    if (squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value & squares[0][0].value !== '') {
+      return squares[0][0].value;
+    } else if (squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value && squares[0][0].value !== '') {
+      return squares[0][2].value;
+    } 
 
-
+    for (let r = 0; r < 3; r++) {
+      for (let c = 0; c < 3; c++) {
+        if (squares[r][c].value === '') {
+          return null;
+        }
+      }}
+      //returning null if there are empty squares
+      return 'Tie';
 
   };
 
-  const resetGame = () => {
+  function reset() {
     // Complete in Wave 4
+    setSquares(generateSquares())
   }
 
   return (
@@ -81,7 +104,7 @@ const App = () => {
         <h1>React Tic Tac Toe</h1>
         <h2>Current player is {currentPlayer}</h2>
         <h2>The winner is ...{winner} </h2>
-        <button>Reset Game</button>
+        <button className="reset" onClick={reset}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquares} />
