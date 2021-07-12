@@ -22,9 +22,9 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
   return squares;
 }
+
 
 
 const App = () => {
