@@ -17,7 +17,11 @@ const generateSquareComponents = (squares, onClickCallback) => {
   }
 
   return oneDArray.map((square) => {
-    return <Square value={square.value} id={square.id} key={square.id} onClickCallback ={ () =>onClickCallback(square)}/>
+    return <Square 
+    value={square.value} 
+    id={square.id} 
+    key={square.id} 
+    onClickCallback ={ () =>onClickCallback(square)}/>
   });
 };
 
